@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Медицинская карта — Биологический возраст</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="proto">
+    <span class="proto-label">Состояние страницы</span>
+    <div class="seg" role="group" aria-label="Состояние начальной страницы">
+      <button type="button" class="seg-b on" data-state="none" aria-pressed="true">Нет результатов</button>
+      <button type="button" class="seg-b" data-state="voice" aria-pressed="false">Только голос</button>
+      <button type="button" class="seg-b" data-state="both" aria-pressed="false">Оба результата</button>
+    </div>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Навигация личного кабинета">
+      <div class="side-scroll">
+        <div class="side-head">
+          <span class="logo-wrap"><img src="assets/logo.svg" alt="Genotek" width="131" height="35" /></span>
+          <button type="button" class="icon-btn" id="nav-close" aria-label="Закрыть меню">
+            <img src="assets/sidebar-close.svg" alt="" width="24" height="24" />
+          </button>
+        </div>
+        <nav class="side-nav">
+          <div class="nav-item">
+            <img src="assets/icon-home.svg" alt="" width="24" height="24" />
+            <span>Главная</span>
+          </div>
+          <div class="nav-item">
+            <img src="assets/icon-health.svg" alt="" width="24" height="24" />
+            <span>Здоровье</span>
+          </div>
+          <div class="nav-item active">
+            <img src="assets/icon-medcard.svg" alt="" width="24" height="24" />
+            <span>Медицинская карта</span>
+          </div>
+          <div class="nav-item">
+            <img src="assets/icon-questionnaire.svg" alt="" width="24" height="24" />
+            <span>Анкета</span>
+          </div>
+          <div class="nav-item">
+            <img src="assets/icon-ancestry.svg" alt="" width="24" height="24" />
+            <span>Происхождение</span>
+          </div>
+          <div class="nav-item">
+            <img src="assets/icon-tree.svg" alt="" width="24" height="24" />
+            <span>Генеалогическое древо</span>
+          </div>
+          <div class="nav-item">
+            <img src="assets/icon-services.svg" alt="" width="24" height="24" />
+            <span>Генеалогические услуги</span>
+          </div>
+          <div class="nav-item">
+            <img src="assets/icon-baby.svg" alt="" width="24" height="24" />
+            <span>Планирование беременности</span>
+          </div>
+        </nav>
+      </div>
+      <div class="side-lang">
+        <button type="button" class="lang" data-noop>RU <img src="assets/icon-chevron.svg" alt="" width="16" height="16" /></button>
+      </div>
+    </aside>
+    <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-row">
+          <button type="button" class="icon-btn menu-btn" id="nav-open" aria-label="Открыть меню">
+            <img src="assets/icon-burger.svg" alt="" width="43" height="38" />
+          </button>
+          <h1 class="page-title">Медицинская карта</h1>
+          <div class="top-actions">
+            <button type="button" class="icon-btn" data-noop aria-label="Поиск">
+              <img src="assets/icon-search.svg" alt="" width="24" height="24" />
+            </button>
+            <button type="button" class="icon-btn" data-noop aria-label="Уведомления">
+              <img src="assets/icon-bell.svg" alt="" width="24" height="24" />
+            </button>
+            <button type="button" class="avatar" data-noop aria-label="Профиль">И</button>
+          </div>
+        </div>
+        <nav class="tabs" aria-label="Разделы медицинской карты">
+          <button class="tab" type="button">Анализы</button>
+          <button class="tab" type="button">Обследования</button>
+          <button class="tab" type="button">Консультации</button>
+          <button class="tab" type="button">Витамины</button>
+          <button class="tab active" type="button">Биологический возраст</button>
+        </nav>
+      </header>
+
+      <div class="content">
+        <div class="view" data-view="none">
+          <section class="hero">
+            <div class="hero-copy">
+              <h2>Узнайте свой биологический возраст</h2>
+              <p>Сколько лет организму на самом деле. Пока можно посчитать двумя способами: по анализам крови и по голосу.</p>
+            </div>
+            <img class="hero-photo" src="assets/hero.webp" alt="" width="2059" height="2113" />
+            <button class="btn light hero-btn" type="button" data-noop>Узнать</button>
+          </section>
+
+          <section class="block">
+            <h2>Зачем два возраста и с чего начать</h2>
+            <div class="why">
+              <div class="why-copy">
+                <div>
+                  <h3>Каждый анализ смотрит на свою систему.</h3>
+                  <p>Кровь показывает обмен веществ и воспаление. Голос показывает то, чего анализы не видят: дыхание, вес, как звучит тело. Одного числа на весь организм пока не существует.</p>
+                </div>
+                <div>
+                  <h3>Числа могут не совпадать, и это нормально</h3>
+                  <p>Системы стареют с разной скоростью. Кровь может быть старше паспорта, а голос моложе. Разница показывает, чему уделить внимание в первую очередь</p>
+                </div>
+              </div>
+              <div class="picks">
+                <div class="pick">
+                  <div>
+                    <h3>По анализу крови</h3>
+                    <p>Какие показатели добавляют годы</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+                <div class="pick">
+                  <div>
+                    <h3>По записи голоса</h3>
+                    <p>Минута записи, ответ сразу</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="block tight">
+            <h2>Рассчитайте возраст</h2>
+            <div class="offers">
+              <article class="offer">
+                <div class="offer-main">
+                  <div class="offer-head">
+                    <div>
+                      <h3>По анализу крови</h3>
+                      <p>Обмен веществ, воспаление, кровь</p>
+                    </div>
+                    <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                  </div>
+                  <p>9 показателей из обычного анализа крови. Покажем, какие из них добавляют вам возраст и что с этим делать.</p>
+                  <div class="chips">
+                    <div class="chip"><b>Как сдать</b><span>Натощак. В Москве медсестра приедет домой. В других городах сдайте в любой лаборатории и загрузите результаты к нам</span></div>
+                    <div class="chip"><b>Результат</b><span>Рассчитаем сразу после получения результатов анализов</span></div>
+                    <div class="chip"><b>Повторять</b><span>Раз в 3 или 6 месяцев</span></div>
+                  </div>
+                  <div class="offer-links">
+                    <button type="button" class="textlink" data-noop>Что вы получите</button>
+                    <button type="button" class="textlink" data-noop>Уже сдавали? Загрузите результаты</button>
+                  </div>
+                </div>
+                <div class="offer-foot">
+                  <button class="btn sm" type="button" data-noop>Заказать</button>
+                  <span class="price">1990 ₽</span>
+                </div>
+              </article>
+              <article class="offer">
+                <div class="offer-main">
+                  <div class="offer-head">
+                    <div>
+                      <h3>По записи голоса</h3>
+                      <p>Связан с весом и дыханием во сне</p>
+                    </div>
+                    <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                  </div>
+                  <p>Посчитаете вслух от одного до тридцати, и мы оценим биологический возраст по записи.</p>
+                  <div class="chips">
+                    <div class="chip"><b>Как сдать</b><span>Запись голоса на телефоне или компьютере</span></div>
+                    <div class="chip"><b>Результат</b><span>Сразу после записи</span></div>
+                    <div class="chip"><b>Длительность</b><span>30 секунд</span></div>
+                  </div>
+                  <div class="offer-links">
+                    <button type="button" class="textlink" data-noop>Что вы получите</button>
+                  </div>
+                </div>
+                <div class="offer-foot">
+                  <button class="btn sm" type="button" data-noop>Записать голос</button>
+                  <span class="price">1990 ₽</span>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="view" data-view="voice" hidden>
+          <section class="summary">
+            <div class="summary-copy">
+              <h2>Биологический возраст</h2>
+              <p>Разные системы организма стареют с разной скоростью, поэтому у каждого анализа свой результат.</p>
+            </div>
+            <div class="profile">
+              <h3>Ваш профиль</h3>
+              <div class="meters">
+                <div class="meter">
+                  <div class="meter-lab"><span>Кровь</span><button type="button" class="delta link" data-noop>Узнать</button></div>
+                  <div class="scale" aria-hidden="true"><i class="scale-track"></i><i class="scale-line"></i></div>
+                </div>
+                <div class="meter">
+                  <div class="meter-lab"><span>Голос</span><span class="delta young">−0,77 года</span></div>
+                  <div class="scale" aria-hidden="true"><i class="scale-track"></i><i class="scale-fill young"></i><i class="scale-line"></i></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="block tight">
+            <h2>Ваши результаты</h2>
+            <div class="results one">
+              <article class="result">
+                <div class="offer-head">
+                  <div>
+                    <h3>По записи голоса</h3>
+                    <p>Связан с весом и дыханием во сне</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+                <div class="age-row">
+                  <p class="age"><i class="mark down" aria-hidden="true"></i>32,8 лет</p>
+                  <span class="pill young">На 0,77 лет меньше хронологического</span>
+                </div>
+                <p class="meta-line"><span>Записан 22.09.2026</span><i class="sep"></i><span>30 секунд речи</span></p>
+              </article>
+            </div>
+          </section>
+
+          <section class="block tight">
+            <h2>Добавьте расчет</h2>
+            <div class="offers one">
+              <article class="offer">
+                <div class="offer-main">
+                  <div class="offer-head">
+                    <div>
+                      <h3>По анализу крови</h3>
+                      <p>Обмен веществ, воспаление, кровь</p>
+                    </div>
+                    <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                  </div>
+                  <p>9 показателей из обычного анализа крови. Покажем, какие из них добавляют вам возраст и что с этим делать.</p>
+                  <div class="chips">
+                    <div class="chip"><b>Как сдать</b><span>Натощак. В Москве медсестра приедет домой. В других городах сдайте в любой лаборатории и загрузите результаты к нам</span></div>
+                    <div class="chip"><b>Результат</b><span>Рассчитаем сразу после получения результатов анализов</span></div>
+                    <div class="chip"><b>Повторять</b><span>Раз в 3 или 6 месяцев</span></div>
+                  </div>
+                  <div class="offer-links">
+                    <button type="button" class="textlink" data-noop>Что вы получите</button>
+                    <button type="button" class="textlink" data-noop>Уже сдавали? Загрузите результаты</button>
+                  </div>
+                </div>
+                <div class="offer-foot">
+                  <button class="btn sm" type="button" data-noop>Заказать</button>
+                  <span class="price">1990 ₽</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="block">
+            <h2>Зачем два возраста и с чего начать</h2>
+            <div class="why">
+              <div class="why-copy">
+                <div>
+                  <h3>Каждый анализ смотрит на свою систему.</h3>
+                  <p>Кровь показывает обмен веществ и воспаление. Голос показывает то, чего анализы не видят: дыхание, вес, как звучит тело. Одного числа на весь организм пока не существует.</p>
+                </div>
+                <div>
+                  <h3>Числа могут не совпадать, и это нормально</h3>
+                  <p>Системы стареют с разной скоростью. Кровь может быть старше паспорта, а голос моложе. Разница показывает, чему уделить внимание в первую очередь</p>
+                </div>
+              </div>
+              <div class="picks">
+                <div class="pick">
+                  <div>
+                    <h3>По анализу крови</h3>
+                    <p>Какие показатели добавляют годы</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+                <div class="pick">
+                  <div>
+                    <h3>По записи голоса</h3>
+                    <p>Минута записи, ответ сразу</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="view" data-view="both" hidden>
+          <section class="summary">
+            <div class="summary-copy">
+              <h2>Биологический возраст</h2>
+              <p>Разные системы организма стареют с разной скоростью, поэтому у каждого анализа свой результат.</p>
+            </div>
+            <div class="profile">
+              <h3>Ваш профиль</h3>
+              <div class="meters">
+                <div class="meter">
+                  <div class="meter-lab"><span>Кровь</span><span class="delta old">+0,77 года</span></div>
+                  <div class="scale" aria-hidden="true"><i class="scale-track"></i><i class="scale-fill old"></i><i class="scale-line"></i></div>
+                </div>
+                <div class="meter">
+                  <div class="meter-lab"><span>Голос</span><span class="delta young">−0,77 года</span></div>
+                  <div class="scale" aria-hidden="true"><i class="scale-track"></i><i class="scale-fill young"></i><i class="scale-line"></i></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="block tight">
+            <h2>Ваши результаты</h2>
+            <div class="results">
+              <article class="result">
+                <div class="offer-head">
+                  <div>
+                    <h3>По записи голоса</h3>
+                    <p>Связан с весом и дыханием во сне</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+                <div class="age-row">
+                  <p class="age"><i class="mark down" aria-hidden="true"></i>32,8 лет</p>
+                  <span class="pill young">На 0,77 лет меньше хронологического</span>
+                </div>
+                <p class="meta-line"><span>Записан 22.09.2026</span><i class="sep"></i><span>30 секунд речи</span></p>
+              </article>
+              <article class="result">
+                <div class="offer-head">
+                  <div>
+                    <h3>По анализу крови</h3>
+                    <p>Обмен веществ, воспаление, кровь</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+                <div class="age-row">
+                  <p class="age"><i class="mark up" aria-hidden="true"></i>34 лет</p>
+                  <span class="pill old">На 0,77 лет больше хронологического</span>
+                </div>
+                <p class="meta-line">
+                  <span>Забор 8.06.2026</span>
+                  <i class="sep"></i>
+                  <span class="with-icon">Разброс дат 8 дней
+                    <svg class="clock" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                      <circle cx="8" cy="8" r="6.2" fill="none" stroke="#898989" stroke-width="1.2" />
+                      <path d="M8 4.6V8.3L10.4 9.6" fill="none" stroke="#898989" stroke-width="1.2" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                  <i class="sep"></i>
+                  <span>Пересдать после 18 декабря</span>
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section class="block">
+            <h2>Зачем два возраста и с чего начать</h2>
+            <div class="why">
+              <div class="why-copy">
+                <div>
+                  <h3>Каждый анализ смотрит на свою систему.</h3>
+                  <p>Кровь показывает обмен веществ и воспаление. Голос показывает то, чего анализы не видят: дыхание, вес, как звучит тело. Одного числа на весь организм пока не существует.</p>
+                </div>
+                <div>
+                  <h3>Числа могут не совпадать, и это нормально</h3>
+                  <p>Системы стареют с разной скоростью. Кровь может быть старше паспорта, а голос моложе. Разница показывает, чему уделить внимание в первую очередь</p>
+                </div>
+              </div>
+              <div class="picks">
+                <div class="pick">
+                  <div>
+                    <h3>По анализу крови</h3>
+                    <p>Какие показатели добавляют годы</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+                <div class="pick">
+                  <div>
+                    <h3>По записи голоса</h3>
+                    <p>Минута записи, ответ сразу</p>
+                  </div>
+                  <img class="chev" src="assets/icon-chevron-right.svg" alt="" width="24" height="24" />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span>© 2025 Genotek. Все права защищены</span>
+        <span class="social">Мы в соцсетях:
+          <a href="https://vk.com" data-noop aria-label="ВКонтакте"><img src="assets/icon-vk.svg" alt="" width="24" height="24" /></a>
+          <a href="https://t.me" data-noop aria-label="Telegram"><img src="assets/icon-tg.svg" alt="" width="24" height="24" /></a>
+        </span>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden>В прототипе эта кнопка никуда не ведёт</div>
+  <script src="js/app.js"></script>
+</body>
+</html>
