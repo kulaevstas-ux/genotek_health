@@ -35,6 +35,7 @@
     --font: "Onest", Arial, sans-serif;
     --content: 1200px;
     --side: 24px;
+    --header-side: 56px;
     --nav: 280px;
     --header: 72px;
   }
@@ -84,7 +85,7 @@
   .toast .x { margin-left: auto; border: 0; background: transparent; color: var(--blue); cursor: pointer; font: 600 14px/20px var(--font); }
 
   .site-header { position: sticky; top: 0; z-index: 10; height: var(--header); background: #fff; border-bottom: 1px solid var(--outline-var); }
-  .bar { max-width: calc(var(--content) + 2 * var(--side)); height: 100%; margin: 0 auto; padding: 0 var(--side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
+  .bar { height: 100%; margin: 0 auto; padding: 0 var(--header-side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
   .logo { display: flex; align-items: center; justify-self: start; }
   .logo img { display: block; width: 204px; height: 26px; object-fit: contain; object-position: left center; }
   .actions { grid-column: 3; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
@@ -108,6 +109,7 @@
   .side .btn { margin-top: 20px; width: 100%; }
   .panel { display: flex; flex-direction: column; gap: 16px; }
   .panel > h2 { margin: 0; font-size: 32px; line-height: 40px; font-weight: 600; }
+  .panel > h3 { margin: 0; font-size: 24px; line-height: 28px; font-weight: 600; }
   .card { background: var(--blue-panel); border: 0; border-radius: 24px; padding: 28px; }
   .card h3 { margin: 0; font-size: 24px; line-height: 28px; font-weight: 600; }
   .card p { margin: 0; color: var(--on-var); }
@@ -271,7 +273,7 @@
   .reqs dd { margin: 0; color: var(--ink); font-size: 12px; line-height: 16px; }
 
   @media (max-width: 1024px) {
-    :root { --side: 16px; }
+    :root { --side: 16px; --header-side: 16px; }
     .tabs { display: none; }
     .bar { grid-template-columns: minmax(0, 1fr) auto; }
     .actions { grid-column: 2; }
@@ -330,7 +332,7 @@
       <img src="assets/genotek_health.svg" width="204" height="26" alt="Genotek Здоровье">
     </a>
     <nav class="tabs" aria-label="Разделы">
-      <a href="https://health.genotek.ru/consultation/subscriptions-store">Подписки</a>
+      <a href="subscriptions.html">Подписки</a>
       <a class="on" href="https://health.genotek.ru/consultation/">Онлайн-консультации</a>
     </nav>
     <div class="actions">
@@ -377,10 +379,10 @@
         </article>
 
         <article class="card promo">
-          <h3>Онлайн-консультации<br>в вашем смартфоне</h3>
-          <p class="text">Ваши консультации и медкарта всегда при вас с нашими приложениями для <a class="lnk" href="https://apps.apple.com/">iPhone</a> и <a class="lnk" href="https://play.google.com/">Android™</a></p>
-          <button class="btn btn-44 dark" type="button" id="send-link">Отправить ссылку на телефон</button>
-          <p class="hint">Ссылка будет отправлена на ваш номер <span class="nowrap">+7 967 ***-**-08</span></p>
+          <h3>Онлайн-консультации<br>в вашем смартфоне</h3>
+          <p class="text">Ваши консультации и медкарта всегда при вас с нашими приложениями для <a class="lnk" href="https://apps.apple.com/">iPhone</a> и <a class="lnk" href="https://play.google.com/">Android™</a></p>
+          <button class="btn btn-44 dark" type="button" id="send-link">Отправить ссылку на телефон</button>
+          <p class="hint">Ссылка будет отправлена на ваш номер <span class="nowrap">+7 967 ***-**-08</span></p>
         </article>
       </section>
 
@@ -394,7 +396,7 @@
               <p class="clinic">Клиника Генотек Здоровье</p>
               <div class="report-actions">
                 <button class="btn btn-44 primary" type="button" id="rate-btn">Оценить консультацию</button>
-                <button class="btn btn-44 outline" type="button" id="chat-btn">История чата с врачом</button>
+                <button class="btn btn-44 outline" type="button" id="chat-btn">История чата с врачом</button>
               </div>
             </div>
             <time datetime="2026-01-02">02.01.2026</time>
@@ -402,30 +404,30 @@
           <hr class="sep">
           <section class="report-section">
             <h4>Наиболее вероятные заболевания</h4>
-            <p>Дистанционное консультирование не заменяет и не равнозначно очному осмотру врача. Нижеприведённая информация не является назначением, а является медицинским информированием, носит исключительно справочный характер. С учётом информации, которую вы мне предоставили, можно предположить травмированный внутридермальный невус? Дерматофиброма?</p>
+            <p>Дистанционное консультирование не заменяет и не равнозначно очному осмотру врача. Нижеприведённая информация не является назначением, а является медицинским информированием, носит исключительно справочный характер. С учётом информации, которую вы мне предоставили, можно предположить травмированный внутридермальный невус? Дерматофиброма?</p>
           </section>
           <section class="report-section">
-            <h4>Рекомендуемые анализы и исследования</h4>
-            <p>Для уточнения диагноза и исключения злокачественности образования в подобных случаях обычно рекомендуют очный осмотр с проведением дерматоскопии.</p>
+            <h4>Рекомендуемые анализы и исследования</h4>
+            <p>Для уточнения диагноза и исключения злокачественности образования в подобных случаях обычно рекомендуют очный осмотр с проведением дерматоскопии.</p>
           </section>
           <section class="report-section">
             <h4>Рекомендуемые консультации специалистов</h4>
-            <p>Для точной диагностики и определения тактики дальнейшего лечения обычно рекомендуют обратиться к дерматологу на очный приём.</p>
+            <p>Для точной диагностики и определения тактики дальнейшего лечения обычно рекомендуют обратиться к дерматологу на очный приём.</p>
           </section>
           <section class="report-section">
-            <h4>Информация о лекарственных препаратах</h4>
-            <p>В подобных случаях обычно назначают на этапе дообследования наружно для снятия воспаления Бетаметазона дипропионат + гентамицин (Акридерм Гента, Белогент) или Бетаметазона дипропионат + фузидовая кислота (Фуцикорт) крем для наружного применения наносить 2 раза в сутки тонким слоем на поражённые участки кожи в течение 5–7 дней.</p>
+            <h4>Информация о лекарственных препаратах</h4>
+            <p>В подобных случаях обычно назначают на этапе дообследования наружно для снятия воспаления Бетаметазона дипропионат + гентамицин (Акридерм Гента, Белогент) или Бетаметазона дипропионат + фузидовая кислота (Фуцикорт) крем для наружного применения наносить 2 раза в сутки тонким слоем на поражённые участки кожи в течение 5–7 дней.</p>
           </section>
           <section class="report-section">
             <h4>Общие рекомендации</h4>
-            <p>Не обгорать! Не находиться под воздействием прямых солнечных лучей во время пикового УФ-излучения (в нашем регионе это с 11:30 до 14:30). Загорать допустимо в безопасные часы (обычно это с 7 до 11–12 и с 16 до 19), и так же обязательно с SPF. Использование солнцезащитных средств с SPF 50+, наносить крем заранее, за 20–30 минут до выхода на улицу, обновлять защиту раз в 1,5–2 часа, а также после каждой водной процедуры, применять защиту на всех открытых зонах, динамическое наблюдение с проведением профилактической дерматоскопии.</p>
+            <p>Не обгорать! Не находиться под воздействием прямых солнечных лучей во время пикового УФ-излучения (в нашем регионе это с 11:30 до 14:30). Загорать допустимо в безопасные часы (обычно это с 7 до 11–12 и с 16 до 19), и так же обязательно с SPF. Использование солнцезащитных средств с SPF 50+, наносить крем заранее, за 20–30 минут до выхода на улицу, обновлять защиту раз в 1,5–2 часа, а также после каждой водной процедуры, применять защиту на всех открытых зонах, динамическое наблюдение с проведением профилактической дерматоскопии.</p>
           </section>
           <section class="report-section">
             <h4>Рост (см)</h4>
             <p>29</p>
           </section>
           <div class="report-foot">
-            <a class="btn btn-44 outline" href="https://market.yandex.ru/catalog--lekarstvennye-preparaty-i-bad/72412">Перейти в аптеку</a>
+            <a class="btn btn-44 outline" href="https://market.yandex.ru/catalog--lekarstvennye-preparaty-i-bad/72412">Перейти в аптеку</a>
             <a class="btn btn-44 ghost" href="#consultations">Свернуть</a>
           </div>
         </article>
@@ -442,7 +444,7 @@
               <li>Стаж 12 лет</li>
             </ul>
           </div>
-          <a class="btn btn-44 outline" href="doctor.html">Записаться на приём</a>
+          <a class="btn btn-44 outline" href="doctor.html">Записаться на приём</a>
         </article>
       </section>
 
@@ -450,7 +452,7 @@
         <article class="card">
           <form class="profile-form" id="profile-form" novalidate>
             <div class="field wide">
-              <label for="pf-name">Как к вам обращаться <span class="req" aria-hidden="true">*</span></label>
+              <label for="pf-name">Как к вам обращаться <span class="req" aria-hidden="true">*</span></label>
               <input class="input" id="pf-name" name="name" type="text" autocomplete="given-name" value="Антон" required aria-describedby="pf-name-err">
               <span class="err" id="pf-name-err" hidden>Укажите имя</span>
             </div>
@@ -464,12 +466,12 @@
             <div class="field">
               <label for="pf-birth">Дата рождения</label>
               <input class="input" id="pf-birth" name="birth" type="text" inputmode="numeric" autocomplete="bday" placeholder="ДД.ММ.ГГГГ" value="17.04.1996" aria-describedby="pf-birth-err">
-              <span class="err" id="pf-birth-err" hidden>Введите дату в формате ДД.ММ.ГГГГ</span>
+              <span class="err" id="pf-birth-err" hidden>Введите дату в формате ДД.ММ.ГГГГ</span>
             </div>
             <div class="field">
               <label for="pf-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
               <input class="input" id="pf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" value="+7 967 319-45-08" required aria-describedby="pf-phone-hint pf-phone-err">
-              <span class="hint" id="pf-phone-hint">Если вы измените номер, мы попросим подтвердить его по СМС</span>
+              <span class="hint" id="pf-phone-hint">Если вы измените номер, мы попросим подтвердить его по СМС</span>
               <span class="err" id="pf-phone-err" hidden>Введите номер полностью</span>
             </div>
             <div class="field">
@@ -483,7 +485,7 @@
       </section>
 
       <section class="panel" id="subscriptions" aria-label="Подписки" hidden>
-        <h2>Пакеты консультаций</h2>
+        <h3>Пакеты консультаций</h3>
         <div class="plans" id="plans"></div>
         <a class="plans-foot" href="https://health.genotek.ru/consultation/subscriptions-store">Оферта клиник-партнёров</a>
       </section>
@@ -491,7 +493,7 @@
       <section class="panel" id="support" aria-label="Поддержка" hidden>
         <article class="card support">
           <h3>Напишите нам, если возникли проблемы</h3>
-          <p>Обращаясь в поддержку, вы отправляете сообщение команде поддержки Genotek Здоровье, а не врачу, с которым проходили консультацию.</p>
+          <p>Обращаясь в поддержку, вы отправляете сообщение команде поддержки Genotek Здоровье, а не врачу, с которым проходили консультацию.</p>
           <p class="account-id">Номер вашей учётной записи — <b>8751806</b></p>
           <div class="support-actions">
             <a class="btn btn-44 outline" href="https://t.me/genotek_health_service_bot" target="_blank" rel="noopener">
@@ -509,7 +511,7 @@
       <section class="panel" id="promocode" aria-label="Промокод" hidden>
         <article class="card promo-card">
           <h3>Введите промокод</h3>
-          <p>Получите скидку на онлайн-консультацию или активируйте корпоративную подписку</p>
+          <p>Получите скидку на онлайн-консультацию или активируйте корпоративную подписку</p>
           <form class="promo-form" id="promo-form" novalidate>
             <input class="input" id="promo" type="text" placeholder="Промокод" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Промокод" aria-describedby="promo-err">
             <button class="btn btn-44 primary" type="submit" id="promo-submit" disabled>Применить</button>
@@ -522,7 +524,7 @@
             </span>
             <div>
               <b>Нет действующих промокодов</b>
-              <span>Активируйте скидку — введите промокод в поле выше</span>
+              <span>Активируйте скидку — введите промокод в поле выше</span>
             </div>
           </div>
           <ul class="promo-list" id="promo-list" aria-label="Действующие промокоды" hidden></ul>
@@ -539,15 +541,15 @@
   <h2 id="rate-title">Оцените консультацию</h2>
   <form id="rate-form">
     <fieldset class="rate">
-      <legend>Как бы вы оценили врача?</legend>
+      <legend>Как бы вы оценили врача?</legend>
       <div class="stars" data-rate="doctor"></div>
     </fieldset>
     <fieldset class="rate">
-      <legend>Как бы вы оценили качество сервиса?<small>Время ожидания, качество связи, помогла ли консультация</small></legend>
+      <legend>Как бы вы оценили качество сервиса?<small>Время ожидания, качество связи, помогла ли консультация</small></legend>
       <div class="stars" data-rate="service"></div>
     </fieldset>
     <label class="field-label" for="rate-comment">Оставьте комментарий <span>(необязательно)</span></label>
-    <textarea class="textarea" id="rate-comment" name="comment" placeholder="Напишите здесь, понравилась ли вам консультация"></textarea>
+    <textarea class="textarea" id="rate-comment" name="comment" placeholder="Напишите здесь, понравилась ли вам консультация"></textarea>
     <button class="btn btn-44 primary" type="submit" id="rate-submit" disabled>Отправить отзыв</button>
   </form>
 </dialog>
@@ -557,9 +559,9 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
   <div class="chat-body">
-    <h2 id="chat-title">История чата в телефоне</h2>
-    <p>В данный момент история чата доступна только в мобильном приложении.</p>
-    <p>Мы отправим вам ссылку для загрузки приложения</p>
+    <h2 id="chat-title">История чата в телефоне</h2>
+    <p>В данный момент история чата доступна только в мобильном приложении.</p>
+    <p>Мы отправим вам ссылку для загрузки приложения</p>
     <form class="tel" id="chat-form" novalidate>
       <label class="tel-field">
         <span class="tel-code"><span class="flag" aria-hidden="true"></span>+7</span>
@@ -600,17 +602,17 @@
     <div class="fine">
       <p>© 2016–2026 ООО «Клиника Генотек Здоровье»</p>
       <p>Фактический адрес: Россия, 123098, г. Москва, ул. Маршала Новикова д.17</p>
-      <p>Консультации, экспресс-консультации и информационные услуги оказывают ООО «Клиника Генотек Здоровье» и <a class="lnk u" href="https://storage.yandexcloud.net/health-legal/health_list.pdf">её партнёры</a></p>
-      <p><span class="badge">0+</span> Genotek Здоровье — сервис онлайн-консультаций с врачами. Для постановки диагноза и назначения плана лечения следует записаться на очный прием к специалисту.</p>
-      <p>Apple и логотип Apple являются зарегистрированными товарными знаками компании Apple Inc. в США и других странах. App Store является знаком обслуживания компании Apple Inc. Android, Google Play и логотип Google Play являются товарными знаками корпорации Google Inc.</p>
-      <p><a class="lnk u" href="https://health.genotek.ru/legal/privacy-policy/">Политики в отношении обработки персональных данных</a></p>
+      <p>Консультации, экспресс-консультации и информационные услуги оказывают ООО «Клиника Генотек Здоровье» и <a class="lnk u" href="https://storage.yandexcloud.net/health-legal/health_list.pdf">её партнёры</a></p>
+      <p><span class="badge">0+</span> Genotek Здоровье — сервис онлайн-консультаций с врачами. Для постановки диагноза и назначения плана лечения следует записаться на очный прием к специалисту.</p>
+      <p>Apple и логотип Apple являются зарегистрированными товарными знаками компании Apple Inc. в США и других странах. App Store является знаком обслуживания компании Apple Inc. Android, Google Play и логотип Google Play являются товарными знаками корпорации Google Inc.</p>
+      <p><a class="lnk u" href="https://health.genotek.ru/legal/privacy-policy/">Политики в отношении обработки персональных данных</a></p>
     </div>
     <hr class="sep">
     <details class="reqs">
       <summary>Реквизиты</summary>
       <dl>
         <dt>Полное наименование</dt>
-        <dd>Общество с ограниченной ответственностью «Клиника Генотек Здоровье»</dd>
+        <dd>Общество с ограниченной ответственностью «Клиника Генотек Здоровье»</dd>
         <dt>ОГРН</dt><dd>5177746308394</dd>
         <dt>ИНН</dt><dd>7704448842</dd>
         <dt>КПП</dt><dd>770901001</dd>
@@ -673,34 +675,34 @@ document.addEventListener("click", (event) => {
   showToast("Медкарта", trigger.dataset.toast);
 });
 document.getElementById("send-link").addEventListener("click", () => {
-  showToast("Ссылка отправлена", "Проверьте СМС на номере +7 967 ***-**-08.");
+  showToast("Ссылка отправлена", "Проверьте СМС на номере +7 967 ***-**-08.");
 });
 const PLANS = [
-  { title: "Здоровое лето", grad: "#ff8637, #ffb547", accent: "#d9590b", price: "Купить за 11 880 ₽",
-    items: ["3 консультации дерматовенеролога, терапевта или аллерголога", "Подбор солнцезащитного крема", "Неограниченные экспресс-консультации (дежурные терапевты и педиатры)", "Длительность — 90 дней", "Вы экономите более 20%"] },
-  { title: "Мой психолог", grad: "#819bf8, #af48ff", accent: "#7a2fd6", price: "Купить за 9 028 ₽",
+  { id: "summer", title: "Здоровое лето", grad: "#ff8637, #ffb547", accent: "#d9590b", price: "Купить за 11 880 ₽",
+    items: ["3 консультации дерматовенеролога, терапевта или аллерголога", "Подбор солнцезащитного крема", "Неограниченные экспресс-консультации (дежурные терапевты и педиатры)", "Длительность — 90 дней", "Вы экономите более 20%"] },
+  { id: "psych", title: "Мой психолог", grad: "#819bf8, #af48ff", accent: "#7a2fd6", price: "Купить за 9 028 ₽",
     items: ["3 консультации психолога", "Длительность — 180 дней", "Вы экономите более 15%"] },
-  { title: "Мужское здоровье", grad: "#55abff, #69728c", accent: "#3f5f8f", price: "7 340 ₽ в месяц",
+  { id: "men", title: "Мужское здоровье", grad: "#55abff, #69728c", accent: "#3f5f8f", price: "7 340 ₽ в месяц",
     items: ["3 консультации (терапевт, дерматовенеролог, уролог, эндокринолог)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите более 25%"] },
-  { title: "Здоровые суставы", grad: "#bd995b, #ff8637", accent: "#93683b", price: "8 225 ₽ в месяц",
-    items: ["3 консультации (ревматолог, ортопед, травматолог, терапевт)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите более 1 490 ₽ в месяц"] },
-  { title: "Здоровый ЖКТ", grad: "#7386f2, #25e3eb", accent: "#3f58d6", price: "9 600 ₽ в месяц",
+  { id: "joints", title: "Здоровые суставы", grad: "#bd995b, #ff8637", accent: "#93683b", price: "8 225 ₽ в месяц",
+    items: ["3 консультации (ревматолог, ортопед, травматолог, терапевт)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите более 1 490 ₽ в месяц"] },
+  { id: "gut", title: "Здоровый ЖКТ", grad: "#7386f2, #25e3eb", accent: "#3f58d6", price: "9 600 ₽ в месяц",
     items: ["3 консультации (гастроэнтеролог, терапевт, диетолог)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите 25%"] },
-  { title: "Женское здоровье", grad: "#fa3aa1, #af48ff", accent: "#c4228a", price: "11 220 ₽ в месяц",
-    items: ["3 консультации (гинеколог, дерматовенеролог, эндокринолог, терапевт)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите до 30%"] },
-  { title: "Безлимитные консультации", grad: "#ff53b4, #ff8637", accent: "#e0306f", price: "9 363 ₽ в месяц",
-    items: ["Неограниченные экспресс-консультации (дежурные терапевты и педиатры)", "5 обычных консультаций (кроме психолога и психотерапевта)", "Автопродление каждый месяц", "Вы экономите на консультациях более 30%"] },
-  { title: "Всегда на связи", grad: "#3b9625, #25c8c8", accent: "#2f7d1d", price: "10 680 ₽ в месяц",
-    items: ["4 консультации любых специалистов (кроме психолога и психотерапевта)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите 25%"] },
-  { title: "Детское здоровье", grad: "#4a80ff, #33d3d3", accent: "#2a62e0", price: "3 429 ₽ в месяц",
-    items: ["3 консультации (педиатр, детский невролог, дерматовенеролог)", "Неограниченные экспресс-консультации (дежурные педиатры)", "Автопродление каждый месяц", "Вы экономите до 30%"] },
+  { id: "women", title: "Женское здоровье", grad: "#fa3aa1, #af48ff", accent: "#c4228a", price: "11 220 ₽ в месяц",
+    items: ["3 консультации (гинеколог, дерматовенеролог, эндокринолог, терапевт)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите до 30%"] },
+  { id: "unlimited", title: "Безлимитные консультации", grad: "#ff53b4, #ff8637", accent: "#e0306f", price: "9 363 ₽ в месяц",
+    items: ["Неограниченные экспресс-консультации (дежурные терапевты и педиатры)", "5 обычных консультаций (кроме психолога и психотерапевта)", "Автопродление каждый месяц", "Вы экономите на консультациях более 30%"] },
+  { id: "always", title: "Всегда на связи", grad: "#3b9625, #25c8c8", accent: "#2f7d1d", price: "10 680 ₽ в месяц",
+    items: ["4 консультации любых специалистов (кроме психолога и психотерапевта)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите 25%"] },
+  { id: "kids", title: "Детское здоровье", grad: "#4a80ff, #33d3d3", accent: "#2a62e0", price: "3 429 ₽ в месяц",
+    items: ["3 консультации (педиатр, детский невролог, дерматовенеролог)", "Неограниченные экспресс-консультации (дежурные педиатры)", "Автопродление каждый месяц", "Вы экономите до 30%"] },
 ];
 
-document.getElementById("plans").innerHTML = PLANS.map(({ title, grad, accent, price, items }) => `
+document.getElementById("plans").innerHTML = PLANS.map(({ id, title, grad, accent, price, items }) => `
   <article class="plan" style="--grad: linear-gradient(135deg, ${grad}); --accent: ${accent}">
     <h3>${title}</h3>
     <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
-    <button class="btn btn-44" type="button" data-toast="Подписка «${title}» скоро будет доступна для оформления.">${price}</button>
+    <a class="btn btn-44" href="subscription-buy.html?plan=${id}">${price}</a>
   </article>`).join("");
 
 const profileForm = document.getElementById("profile-form");
@@ -755,8 +757,8 @@ profileForm.addEventListener("submit", (event) => {
 });
 
 const PROMOCODES = {
-  HEALTH10: "Скидка 10% на онлайн-консультацию · до 31 декабря 2026",
-  CORP2026: "Корпоративная подписка «Всегда на связи» · до 31 декабря 2026",
+  HEALTH10: "Скидка 10% на онлайн-консультацию · до 31 декабря 2026",
+  CORP2026: "Корпоративная подписка «Всегда на связи» · до 31 декабря 2026",
 };
 const promoInput = document.getElementById("promo");
 const promoSubmit = document.getElementById("promo-submit");
@@ -779,7 +781,7 @@ document.getElementById("promo-form").addEventListener("submit", (event) => {
   const code = promoInput.value.trim().toUpperCase();
   if (!code) return;
   if (!PROMOCODES[code]) {
-    setPromoError("Промокод не найден или срок его действия истёк");
+    setPromoError("Промокод не найден или срок его действия истёк");
     return;
   }
   if (promoList.querySelector(`[data-code="${code}"]`)) {
@@ -812,7 +814,7 @@ const rateBtn = document.getElementById("rate-btn");
 for (const group of document.querySelectorAll("[data-rate]")) {
   const name = group.dataset.rate;
   group.innerHTML = RATING_HINTS.map((hint, index) =>
-    `<label class="star" data-value="${index + 1}"><input type="radio" name="${name}" value="${index + 1}" aria-label="${index + 1} из 5 — ${hint}">${STAR_ICON}<span class="tip" aria-hidden="true">${hint}</span></label>`
+    `<label class="star" data-value="${index + 1}"><input type="radio" name="${name}" value="${index + 1}" aria-label="${index + 1} из 5 — ${hint}">${STAR_ICON}<span class="tip" aria-hidden="true">${hint}</span></label>`
   ).join("");
 }
 
@@ -889,7 +891,7 @@ chatForm.addEventListener("submit", (event) => {
   if (chatSubmit.disabled) return;
   const phone = `+7 ${chatPhone.value}`;
   chatModal.close();
-  openDone("Ссылка отправлена", `Проверьте СМС на номере ${phone}`);
+  openDone("Ссылка отправлена", `Проверьте СМС на номере ${phone}`);
 });
 
 for (const modal of [rateModal, rateDone, chatModal]) {

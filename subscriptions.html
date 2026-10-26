@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пакеты консультаций | Genotek Здоровье</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000000;
+    --on-var: #595f74;
+    --bright: #ffffff;
+    --dim: #e9ecf0;
+    --outline: #bec7d2;
+    --outline-var: #d9dee4;
+    --placeholder: #8794aa;
+    --blue: #236ffa;
+    --blue-c: #d8ecff;
+    --on-blue-c: #163b92;
+    --blue-panel: rgba(216, 236, 255, .48);
+    --blue-tint: #edf0ff;
+    --java: #0a9fb0;
+    --gold: #93683b;
+    --shadow-card: 0 8px 24px rgba(0,0,0,.05);
+    --shadow-soft: 0 12px 34px rgba(0,0,0,.07);
+    --shadow-pop: 0 16px 48px rgba(0,0,0,.12);
+    --font: "Onest", Arial, sans-serif;
+    --content: 1200px;
+    --side: 24px;
+    --header-side: 56px;
+    --header: 72px;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bright); font-size: 16px; line-height: 24px; font-weight: 400; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); }
+  button, input { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; border: 1px solid transparent; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; background: transparent; color: var(--blue); transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease; }
+  .btn-44 { min-height: 44px; padding: 12px 24px; font-size: 14px; line-height: 20px; }
+  .btn.primary { border: 0; background: var(--blue); color: #fff; }
+  .btn.primary:hover { background: color-mix(in srgb, var(--blue) 92%, var(--on-blue-c) 8%); }
+  .btn.outline { background: #fff; color: var(--blue); border-color: var(--blue); }
+  .btn.outline:hover { background: color-mix(in srgb, var(--on-blue-c) 8%, #fff); }
+  .lnk { color: var(--blue); font-weight: 600; text-decoration: none; }
+  .lnk:hover { color: var(--on-blue-c); }
+  .lnk.s { font-size: 14px; line-height: 20px; }
+  .lnk.u { text-decoration: underline; font-weight: 400; }
+  .tabs { display: flex; gap: 24px; align-items: center; }
+  .tabs a { padding: 8px 0; color: #8794aa; text-decoration: none; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .tabs a:hover { color: var(--ink); }
+  .tabs a.on { color: #000; box-shadow: inset 0 -2px 0 var(--blue); }
+  .sep { height: 1px; background: color-mix(in srgb, var(--ink) 10%, transparent); border: 0; margin: 24px 0; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 9999px; background: var(--dim); font-weight: 700; font-size: 11px; line-height: 14px; color: var(--ink); white-space: nowrap; }
+
+  .site-header { position: sticky; top: 0; z-index: 10; height: var(--header); background: #fff; border-bottom: 1px solid var(--outline-var); }
+  .bar { height: 100%; margin: 0 auto; padding: 0 var(--header-side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
+  .logo { display: flex; align-items: center; justify-self: start; }
+  .logo img { display: block; width: 204px; height: 26px; object-fit: contain; object-position: left center; }
+  .actions { grid-column: 3; display: flex; justify-content: flex-end; }
+  .wrap { max-width: calc(var(--content) + 2 * var(--side)); margin: 0 auto; padding: 40px var(--side) 80px; }
+
+  .page-title { margin: 0 0 32px; font-size: 40px; line-height: 48px; font-weight: 600; }
+  .plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .plan {
+    --accent: var(--blue);
+    --grad: linear-gradient(135deg, #ff8637, #ffb547);
+    display: flex; flex-direction: column; min-height: 400px;
+    padding: 28px 24px 24px; border-radius: 24px; color: #fff;
+    background: var(--grad);
+    box-shadow: var(--shadow-card);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+  .plan:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+  .plan h2 { margin: 0; font-size: 24px; line-height: 28px; font-weight: 600; }
+  .plan .body { flex: 1; margin: 16px 0 24px; white-space: pre-line; font-size: 14px; line-height: 22px; color: rgba(255,255,255,.92); }
+  .plan .cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: 12px 20px; border-radius: 9999px;
+    background: #fff; color: var(--accent); text-decoration: none;
+    font-weight: 600; font-size: 16px; line-height: 22px;
+    transition: background-color 120ms ease, color 120ms ease;
+  }
+  .plan .cta:hover { background: rgba(255,255,255,.88); }
+
+  .plan.summer { --accent: #d9590b; --grad: linear-gradient(135deg, #ff8637, #ffb547); }
+  .plan.psych { --accent: #7a2fd6; --grad: linear-gradient(135deg, #819bf8, #af48ff); }
+  .plan.men { --accent: #3f5f8f; --grad: linear-gradient(135deg, #55abff, #69728c); }
+  .plan.joints { --accent: #93683b; --grad: linear-gradient(135deg, #bd995b, #ff8637); }
+  .plan.gut { --accent: #3f58d6; --grad: linear-gradient(135deg, #7386f2, #25e3eb); }
+  .plan.women { --accent: #c4228a; --grad: linear-gradient(135deg, #fa3aa1, #af48ff); }
+  .plan.unlimited { --accent: #e0306f; --grad: linear-gradient(135deg, #ff53b4, #ff8637); }
+  .plan.always { --accent: #2f7d1d; --grad: linear-gradient(135deg, #3b9625, #25c8c8); }
+  .plan.kids { --accent: #2a62e0; --grad: linear-gradient(135deg, #4a80ff, #33d3d3); }
+
+  .plans-foot { display: block; width: fit-content; margin: 32px auto 0; color: var(--blue); font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; }
+  .plans-foot:hover { color: var(--on-blue-c); }
+
+  footer { background: #fff; border-top: 1px solid color-mix(in srgb, var(--ink) 40%, transparent); }
+  .foot { max-width: calc(var(--content) + 2 * var(--side)); margin: 0 auto; padding: 64px var(--side) 32px; color: var(--ink); font-size: 11px; line-height: 17px; }
+  .foot-brand { display: inline-flex; }
+  .foot-brand img { display: block; width: 202px; height: 25px; }
+  .foot-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
+  .foot-links .lnk { color: var(--ink); font-size: 13px; line-height: 20px; }
+  .foot-links .lnk:hover { color: var(--blue); }
+  .foot .sep { margin: 24px 0; }
+  .fine p { margin: 8px 0 0; max-width: 90ch; }
+  .fine p:first-child { margin-top: 0; font-weight: 700; }
+  .fine .lnk.u { color: var(--ink); }
+  .fine .lnk.u:hover { color: var(--blue); }
+  .fine .badge { padding: 2px 6px; font-size: 10px; line-height: 12px; }
+  .reqs summary { cursor: pointer; font-weight: 700; font-size: 14px; line-height: 20px; color: var(--ink); }
+  .reqs dl { display: grid; grid-template-columns: 200px 1fr; gap: 8px 16px; margin: 16px 0 0; }
+  .reqs dt { color: var(--on-var); font-size: 12px; line-height: 16px; }
+  .reqs dd { margin: 0; color: var(--ink); font-size: 12px; line-height: 16px; }
+
+  @media (max-width: 1024px) {
+    :root { --side: 16px; --header-side: 16px; }
+    .tabs { display: none; }
+    .bar { grid-template-columns: minmax(0, 1fr) auto; }
+    .actions { grid-column: 2; }
+    .wrap { padding-top: 24px; }
+    .page-title { font-size: 28px; line-height: 32px; margin-bottom: 24px; }
+    .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .plan { min-height: 360px; padding: 24px 20px 20px; }
+    .reqs dl { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .plans { grid-template-columns: 1fr; }
+    .plan { min-height: 0; }
+    .plan h2 { font-size: 22px; line-height: 28px; }
+    .foot { padding: 40px var(--side) 24px; }
+    .foot-brand img { width: 162px; height: 20px; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header" id="header">
+  <div class="bar">
+    <a class="logo" href="https://health.genotek.ru/consultation/">
+      <img src="assets/genotek_health.svg" width="204" height="26" alt="Genotek Здоровье">
+    </a>
+    <nav class="tabs" aria-label="Разделы">
+      <a class="on" href="subscriptions.html" aria-current="page">Подписки</a>
+      <a href="https://health.genotek.ru/consultation/">Онлайн-консультации</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-44 outline login" href="https://health.genotek.ru/telemed/api/login?app=user">Войти</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Пакеты консультаций</h1>
+  <div class="plans">
+    <article class="plan summer">
+      <h2>Здоровое лето</h2>
+      <p class="body">4 консультации (все специалисты кроме ветеринаров/психологов/нутрициологов/ специалистов по подбору врача и клиники)
+Неограниченные экспресс-консультации (дежурные терапевты/педиатры)
+Длительность - 90 дней
+Вы экономите на консультациях более 30%</p>
+      <a class="cta" href="subscription-buy.html?plan=summer">Купить за 14 980 ₽</a>
+    </article>
+
+    <article class="plan psych">
+      <h2>Мой психолог</h2>
+      <p class="body">3 консультации психолога
+Длительность – 180 дней
+Вы экономите на консультациях до 30%</p>
+      <a class="cta" href="subscription-buy.html?plan=psych">Купить за 9 028 ₽</a>
+    </article>
+
+    <article class="plan men">
+      <h2>Мужское здоровье</h2>
+      <p class="body">3 консультации (терапевты/дерматовенерологи/урологи/кардиологи)
+Неограниченные экспресс-консультации (дежурные терапевты)
+Автопродление каждый месяц
+Вы экономите более 20%</p>
+      <a class="cta" href="subscription-buy.html?plan=men">7 348 ₽ в месяц</a>
+    </article>
+
+    <article class="plan joints">
+      <h2>Здоровые суставы</h2>
+      <p class="body">5 консультаций (инфекционисты/ревматологи/ЛОРы/терапевты/травматологи-ортопеды)
+Неограниченные экспресс-консультации (дежурные терапевты)
+Автопродление каждый месяц
+Вы экономите более 1456 ₽ в месяц</p>
+      <a class="cta" href="subscription-buy.html?plan=joints">8 225 ₽ в месяц</a>
+    </article>
+
+    <article class="plan gut">
+      <h2>Здоровый ЖКТ</h2>
+      <p class="body">3 консультации:
+1 гастроэнтеролог
+1 эндокринолог
+1 нутрициолог
+Неограниченные экспресс-консультации (дежурные терапевты)
+Вы экономите 20%</p>
+      <a class="cta" href="subscription-buy.html?plan=gut">9 600 ₽ в месяц</a>
+    </article>
+
+    <article class="plan women">
+      <h2>Женское здоровье</h2>
+      <p class="body">3 консультации (терапевты/дерматовенерологи/урологи/гинекологи)
+Неограниченные экспресс-консультации (дежурные терапевты)
+Автопродление каждый месяц
+Вы экономите до 30%</p>
+      <a class="cta" href="subscription-buy.html?plan=women">11 235 ₽ в месяц</a>
+    </article>
+
+    <article class="plan unlimited">
+      <h2>Безлимитные консультации</h2>
+      <p class="body">Неограниченные экспресс-консультации (дежурные терапевты/педиатры)
++ 5 обычных консультаций (все специалисты кроме психологов
+нутрициологов и терапевта-генетика)
+Автопродление каждый месяц
+Вы экономите на консультациях более 30%</p>
+      <a class="cta" href="subscription-buy.html?plan=unlimited">9 363 ₽ в месяц</a>
+    </article>
+
+    <article class="plan always">
+      <h2>Всегда на связи</h2>
+      <p class="body">4 консультации (все специалисты кроме психологов
+нутрициологов и терапевта-генетика)
+Неограниченные экспресс-консультации (дежурные терапевты)
+Автопродление каждый месяц
+Вы экономите 20%</p>
+      <a class="cta" href="subscription-buy.html?plan=always">10 486 ₽ в месяц</a>
+    </article>
+
+    <article class="plan kids">
+      <h2>Детское здоровье</h2>
+      <p class="body">2 консультации (педиатры/детские неврологи/дерматологи/инфекционисты)
+Неограниченные экспресс-консультации (дежурные педиатры)
+Автопродление каждый месяц
+Вы экономите до 30%</p>
+      <a class="cta" href="subscription-buy.html?plan=kids">3 429 ₽ в месяц</a>
+    </article>
+  </div>
+
+  <a class="plans-foot" href="https://storage.yandexcloud.net/health-legal/kyaz_oferta_podpiska.pdf">Оферта клиник-партнёров</a>
+</main>
+
+<footer>
+  <div class="foot">
+    <a class="foot-brand" href="https://health.genotek.ru/consultation/" aria-label="Genotek Здоровье">
+      <img src="assets/genotek_health.svg" width="202" height="25" alt="">
+    </a>
+    <div class="foot-links">
+      <a class="lnk s" href="https://health.genotek.ru/legal/">Правовые документы</a>
+      <a class="lnk s" href="https://health.genotek.ru/consultation/support-web/index.html">Справка</a>
+    </div>
+    <hr class="sep">
+    <div class="fine">
+      <p>© 2016–2026 ООО «Клиника Генотек Здоровье»</p>
+      <p>Фактический адрес: Россия, 123098, г. Москва, ул. Маршала Новикова д.17</p>
+      <p>Консультации, экспресс-консультации и информационные услуги оказывают ООО «Клиника Генотек Здоровье» и <a class="lnk u" href="https://storage.yandexcloud.net/health-legal/health_list.pdf">её партнёры</a></p>
+      <p><span class="badge">0+</span> Genotek Здоровье — сервис онлайн-консультаций с врачами. Для постановки диагноза и назначения плана лечения следует записаться на очный прием к специалисту.</p>
+      <p>Apple и логотип Apple являются зарегистрированными товарными знаками компании Apple Inc. в США и других странах. App Store является знаком обслуживания компании Apple Inc. Android, Google Play и логотип Google Play являются товарными знаками корпорации Google Inc.</p>
+      <p><a class="lnk u" href="https://health.genotek.ru/legal/privacy-policy/">Политики в отношении обработки персональных данных</a></p>
+    </div>
+    <hr class="sep">
+    <details class="reqs">
+      <summary>Реквизиты</summary>
+      <dl>
+        <dt>Полное наименование</dt>
+        <dd>Общество с ограниченной ответственностью «Клиника Генотек Здоровье»</dd>
+        <dt>ОГРН</dt><dd>5177746308394</dd>
+        <dt>ИНН</dt><dd>7704448842</dd>
+        <dt>КПП</dt><dd>770901001</dd>
+        <dt>Юридический адрес</dt>
+        <dd>105120, г. Москва, вн. тер. г. муниципальный округ Таганский, пер. Наставнический, д. 17, стр. 1, помещ. 63/1</dd>
+      </dl>
+    </details>
+  </div>
+</footer>
+</body>
+</html>

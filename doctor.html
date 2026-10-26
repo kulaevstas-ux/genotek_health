@@ -29,6 +29,7 @@
     --font: "Onest", Arial, sans-serif;
     --content: 1200px;
     --side: 24px;
+    --header-side: 56px;
     --header: 72px;
   }
   * { box-sizing: border-box; }
@@ -83,7 +84,7 @@
   .toast .x { margin-left: auto; border: 0; background: transparent; color: var(--blue); cursor: pointer; font: 600 14px/20px var(--font); }
 
   .site-header { position: sticky; top: 0; z-index: 10; height: var(--header); background: #fff; border-bottom: 1px solid var(--outline-var); }
-  .bar { max-width: calc(var(--content) + 2 * var(--side)); height: 100%; margin: 0 auto; padding: 0 var(--side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
+  .bar { height: 100%; margin: 0 auto; padding: 0 var(--header-side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
   .logo { display: flex; align-items: center; justify-self: start; }
   .logo img { display: block; width: 204px; height: 26px; object-fit: contain; object-position: left center; }
   .actions { grid-column: 3; display: flex; justify-content: flex-end; }
@@ -191,7 +192,7 @@
   .reqs dd { margin: 0; color: var(--ink); font-size: 12px; line-height: 16px; }
 
   @media (max-width: 1024px) {
-    :root { --side: 16px; }
+    :root { --side: 16px; --header-side: 16px; }
     .wrap { padding-top: 24px; }
     .layout { grid-template-columns: 1fr; gap: 16px; }
     .main-col { display: contents; }
@@ -227,7 +228,7 @@
       <img src="assets/genotek_health.svg" width="204" height="26" alt="Genotek Здоровье">
     </a>
     <nav class="tabs" aria-label="Разделы">
-      <a href="https://health.genotek.ru/consultation/subscriptions-store">Подписки</a>
+      <a href="subscriptions.html">Подписки</a>
       <a class="on" href="https://health.genotek.ru/consultation/" aria-current="page">Онлайн-консультации</a>
     </nav>
     <div class="actions">
@@ -244,7 +245,7 @@
   <nav class="crumbs" aria-label="Навигация">
     <a class="lnk s" href="https://health.genotek.ru/consultation/">Главная</a>
     <span aria-hidden="true">–</span>
-    <a class="lnk s" href="https://health.genotek.ru/consultation/taxonomy/382/doctors/">Запись к терапевту</a>
+    <a class="lnk s" href="https://health.genotek.ru/consultation/taxonomy/382/doctors/">Запись к терапевту</a>
     <span aria-hidden="true">–</span>
     <span>Иванова С. А.</span>
   </nav>
@@ -263,16 +264,16 @@
           <div class="tags">
             <span class="badge info">Стаж 32 года</span>
             <span class="badge info">Врач высшей категории</span>
-            <span class="badge info">Взрослые с 18 лет</span>
+            <span class="badge info">Взрослые с 18 лет</span>
           </div>
         </div>
-        <button class="fav" type="button" id="fav" aria-pressed="false" aria-label="В избранное"></button>
+        <button class="fav" type="button" id="fav" aria-pressed="false" aria-label="В избранное"></button>
       </section>
 
       <section class="card" aria-labelledby="qual">
         <h2 id="qual">Квалификация</h2>
-        <p>Консультация взрослых пациентов с 18 лет.</p>
-        <p>Диагностика и лечение заболеваний терапевтического и любых заболеваний кардиологического профиля, интерпретация и оценка анализов и данных лабораторного и инструментального исследования, коррекция терапии и ведение пациентов терапевтического и кардиологического профиля.</p>
+        <p>Консультация взрослых пациентов с 18 лет.</p>
+        <p>Диагностика и лечение заболеваний терапевтического и любых заболеваний кардиологического профиля, интерпретация и оценка анализов и данных лабораторного и инструментального исследования, коррекция терапии и ведение пациентов терапевтического и кардиологического профиля.</p>
       </section>
 
       <section class="card" aria-labelledby="clinic">
@@ -288,9 +289,9 @@
       <section class="card" aria-labelledby="edu">
         <h2 id="edu">Образование</h2>
         <ul class="timeline">
-          <li><time>1991</time><span>Смоленский государственный медицинский институт, высшее образование по специальности «Лечебное дело»</span></li>
-          <li><time>1993</time><span>Смоленский медицинский институт Департамента здравоохранения Смоленской области, интернатура по специальности «Терапия»</span></li>
-          <li><time>2000</time><span>Санкт-Петербургская медицинская академия последипломного образования, ординатура по специальности «Кардиология»</span></li>
+          <li><time>1991</time><span>Смоленский государственный медицинский институт, высшее образование по специальности «Лечебное дело»</span></li>
+          <li><time>1993</time><span>Смоленский медицинский институт Департамента здравоохранения Смоленской области, интернатура по специальности «Терапия»</span></li>
+          <li><time>2000</time><span>Санкт-Петербургская медицинская академия последипломного образования, ординатура по специальности «Кардиология»</span></li>
         </ul>
       </section>
 
@@ -302,13 +303,13 @@
     </div>
 
     <aside class="card booking" aria-labelledby="booking-title">
-      <h2 id="booking-title">Запись на приём</h2>
+      <h2 id="booking-title">Запись на приём</h2>
       <p class="role">Терапевт</p>
       <p class="cost">2 499 ₽</p>
       <hr class="sep">
       <p class="local">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        Запись по местному времени
+        Запись по местному времени
       </p>
       <div class="pills" id="days"></div>
       <div class="pills" id="times"></div>
@@ -320,7 +321,7 @@
   <button class="close" type="button" data-close aria-label="Закрыть">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
-  <h2 id="book-title">Запись на приём</h2>
+  <h2 id="book-title">Запись на приём</h2>
   <form id="book-form" method="dialog">
     <div class="summary">
       <p class="who-line">Иванова Светлана Анатольевна</p>
@@ -338,12 +339,12 @@
         <input type="radio" name="pay" value="foreign">
         <span class="cards"><img src="assets/Visa.svg" width="27" height="9" alt="Visa"><img src="assets/Mastercard.svg" width="27" height="16" alt="Mastercard"></span>
         <b>Иностранной картой</b>
-        <small>Кроме карт Украины, США, Беларуси и стран FATF</small>
+        <small>Кроме карт Украины, США, Беларуси и стран FATF</small>
       </label>
     </div>
     <details class="promo">
       <summary>Промокод <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-      <p class="promo-hint">Получите скидку на онлайн-консультацию или активируйте корпоративную подписку</p>
+      <p class="promo-hint">Получите скидку на онлайн-консультацию или активируйте корпоративную подписку</p>
       <div class="promo-row">
         <input class="input" id="promo" type="text" placeholder="Введите промокод" autocomplete="off" aria-label="Промокод">
         <button class="btn btn-44 outline" type="button" id="promo-apply">Применить</button>
@@ -354,7 +355,7 @@
     <label class="opt">
       <input type="checkbox" name="ads">
       <span class="box" aria-hidden="true"></span>
-      <span>Я <a class="lnk" href="https://health.genotek.ru/legal/">согласен</a> получать рекламные материалы о сервисе Genotek Здоровье и его партнёрах</span>
+      <span>Я <a class="lnk" href="https://health.genotek.ru/legal/">согласен</a> получать рекламные материалы о сервисе Genotek Здоровье и его партнёрах</span>
     </label>
   </form>
 </dialog>
@@ -388,17 +389,17 @@
     <div class="fine">
       <p>© 2016–2026 ООО «Клиника Генотек Здоровье»</p>
       <p>Фактический адрес: Россия, 123098, г. Москва, ул. Маршала Новикова д.17</p>
-      <p>Консультации, экспресс-консультации и информационные услуги оказывают ООО «Клиника Генотек Здоровье» и <a class="lnk u" href="https://storage.yandexcloud.net/health-legal/health_list.pdf">её партнёры</a></p>
-      <p><span class="badge">0+</span> Genotek Здоровье — сервис онлайн-консультаций с врачами. Для постановки диагноза и назначения плана лечения следует записаться на очный прием к специалисту.</p>
-      <p>Apple и логотип Apple являются зарегистрированными товарными знаками компании Apple Inc. в США и других странах. App Store является знаком обслуживания компании Apple Inc. Android, Google Play и логотип Google Play являются товарными знаками корпорации Google Inc.</p>
-      <p><a class="lnk u" href="https://health.genotek.ru/legal/privacy-policy/">Политики в отношении обработки персональных данных</a></p>
+      <p>Консультации, экспресс-консультации и информационные услуги оказывают ООО «Клиника Генотек Здоровье» и <a class="lnk u" href="https://storage.yandexcloud.net/health-legal/health_list.pdf">её партнёры</a></p>
+      <p><span class="badge">0+</span> Genotek Здоровье — сервис онлайн-консультаций с врачами. Для постановки диагноза и назначения плана лечения следует записаться на очный прием к специалисту.</p>
+      <p>Apple и логотип Apple являются зарегистрированными товарными знаками компании Apple Inc. в США и других странах. App Store является знаком обслуживания компании Apple Inc. Android, Google Play и логотип Google Play являются товарными знаками корпорации Google Inc.</p>
+      <p><a class="lnk u" href="https://health.genotek.ru/legal/privacy-policy/">Политики в отношении обработки персональных данных</a></p>
     </div>
     <hr class="sep">
     <details class="reqs">
       <summary>Реквизиты</summary>
       <dl>
         <dt>Полное наименование</dt>
-        <dd>Общество с ограниченной ответственностью «Клиника Генотек Здоровье»</dd>
+        <dd>Общество с ограниченной ответственностью «Клиника Генотек Здоровье»</dd>
         <dt>ОГРН</dt><dd>5177746308394</dd>
         <dt>ИНН</dt><dd>7704448842</dd>
         <dt>КПП</dt><dd>770901001</dd>
@@ -411,25 +412,25 @@
 
 <script>
 const COURSES = [
-  ["2020", "ФГБОУ ВО «Северо-Западный государственный медицинский университет имени И. И. Мечникова» Минздрава России, программа «Артериальная гипертензия: стратификация риска и особенности ведения больных»"],
-  ["2020", "ООО «ОПОЗИОЗ», специальности «Терапия» и «Кардиология»"],
-  ["2020", "ОО «Российская ассоциация эндокринологов», специальности «Терапия» и «Кардиология»"],
+  ["2020", "ФГБОУ ВО «Северо-Западный государственный медицинский университет имени И. И. Мечникова» Минздрава России, программа «Артериальная гипертензия: стратификация риска и особенности ведения больных»"],
+  ["2020", "ООО «ОПОЗИОЗ», специальности «Терапия» и «Кардиология»"],
+  ["2020", "ОО «Российская ассоциация эндокринологов», специальности «Терапия» и «Кардиология»"],
   ["2020–2021", "ООО «Российское научное медицинское общество терапевтов», специальность «Терапия»"],
-  ["2020–2021", "Национальная ассоциация специалистов по инфекционным болезням имени академика В. И. Покровского, специальности «Терапия» и «Кардиология»"],
-  ["2020–2022", "ООО «Федерация анестезиологов и реаниматологов», специальности «Терапия» и «Кардиология»"],
-  ["2021", "ФГБОУ ВО «Северо-Западный государственный медицинский университет имени И. И. Мечникова» Минздрава России, программа «Современные алгоритмы диагностики и лечения нарушений ритма и проводимости»"],
-  ["2021", "Ассоциация «ФЛМ», специальности «Терапия» и «Кардиология»"],
-  ["2021", "ООО СРМР «Союз реабилитологов России», специальности «Терапия» и «Кардиология»"],
-  ["2021", "Ассоциация «ЕАТв», специальности «Терапия» и «Кардиология»"],
-  ["2021", "ООО «Российское общество акушеров-гинекологов», специальности «Терапия» и «Кардиология»"],
-  ["2021", "ООО «Общество по изучению боли», специальности «Терапия» и «Кардиология»"],
-  ["2021–2022", "ООО «Ассоциация врачей общей практики (семейных врачей) Российской Федерации», специальности «Терапия» и «Кардиология»"],
-  ["2022", "ФГБОУ ВО «Северо-Западный государственный медицинский университет имени И. И. Мечникова» Минздрава России, программа «Атерогенные дислипидемии: диагностика, профилактика и фармакологическая коррекция»"],
+  ["2020–2021", "Национальная ассоциация специалистов по инфекционным болезням имени академика В. И. Покровского, специальности «Терапия» и «Кардиология»"],
+  ["2020–2022", "ООО «Федерация анестезиологов и реаниматологов», специальности «Терапия» и «Кардиология»"],
+  ["2021", "ФГБОУ ВО «Северо-Западный государственный медицинский университет имени И. И. Мечникова» Минздрава России, программа «Современные алгоритмы диагностики и лечения нарушений ритма и проводимости»"],
+  ["2021", "Ассоциация «ФЛМ», специальности «Терапия» и «Кардиология»"],
+  ["2021", "ООО СРМР «Союз реабилитологов России», специальности «Терапия» и «Кардиология»"],
+  ["2021", "Ассоциация «ЕАТв», специальности «Терапия» и «Кардиология»"],
+  ["2021", "ООО «Российское общество акушеров-гинекологов», специальности «Терапия» и «Кардиология»"],
+  ["2021", "ООО «Общество по изучению боли», специальности «Терапия» и «Кардиология»"],
+  ["2021–2022", "ООО «Ассоциация врачей общей практики (семейных врачей) Российской Федерации», специальности «Терапия» и «Кардиология»"],
+  ["2022", "ФГБОУ ВО «Северо-Западный государственный медицинский университет имени И. И. Мечникова» Минздрава России, программа «Атерогенные дислипидемии: диагностика, профилактика и фармакологическая коррекция»"],
   ["2022", "ОО «Российское общество психиатров», специальность «Терапия»"],
-  ["2022", "ООО «Федеральный центр НМО», программа «Алгоритмы общения с пациентом — эффективные способы обезопасить себя от преследования»"],
-  ["2022", "ООО «Федеральный центр НМО», программа «Актуальные IT технологии в медицине»"],
-  ["2020–2024", "ИОМ-НП, специальности «Терапия» и «Кардиология»"],
-  ["2020–2024", "ООО «РКО», специальности «Терапия» и «Кардиология»"]
+  ["2022", "ООО «Федеральный центр НМО», программа «Алгоритмы общения с пациентом — эффективные способы обезопасить себя от преследования»"],
+  ["2022", "ООО «Федеральный центр НМО», программа «Актуальные IT технологии в медицине»"],
+  ["2020–2024", "ИОМ-НП, специальности «Терапия» и «Кардиология»"],
+  ["2020–2024", "ООО «РКО», специальности «Терапия» и «Кардиология»"]
 ];
 const SLOTS = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30"];
 const SCHEDULE = [
@@ -518,7 +519,7 @@ function openBooking(day, time) {
   document.getElementById("book-form").reset();
   document.querySelector(".promo").open = false;
   document.getElementById("promo-msg").hidden = true;
-  document.getElementById("book-when").textContent = `${day} ${YEAR}, ${time} – ${addMinutes(time, SLOT_MINUTES)} (по местному времени)`;
+  document.getElementById("book-when").textContent = `${day} ${YEAR}, ${time} – ${addMinutes(time, SLOT_MINUTES)} (по местному времени)`;
   if (daysModal.open) daysModal.close();
   openModal(bookModal);
 }
@@ -558,12 +559,12 @@ for (const modal of [bookModal, daysModal]) {
 document.getElementById("promo-apply").addEventListener("click", () => {
   const code = document.getElementById("promo").value.trim();
   const msg = document.getElementById("promo-msg");
-  msg.textContent = code ? `Промокод «${code}» проверим при оплате` : "Введите промокод";
+  msg.textContent = code ? `Промокод «${code}» проверим при оплате` : "Введите промокод";
   msg.hidden = false;
 });
 document.getElementById("book-form").addEventListener("submit", () => {
   const pay = new FormData(document.getElementById("book-form")).get("pay") === "ru" ? "картой РФ" : "иностранной картой";
-  showToast(DOCTOR, `${state.slot.day}, ${state.slot.time} · ${PRICE}, оплата ${pay}. Переходим к оплате.`);
+  showToast(DOCTOR, `${state.slot.day}, ${state.slot.time} · ${PRICE}, оплата ${pay}. Переходим к оплате.`);
 });
 document.getElementById("toast-close").addEventListener("click", () => {
   document.getElementById("toast").hidden = true;

@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оформление подписки | Genotek Здоровье</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000000;
+    --on-var: #595f74;
+    --bright: #ffffff;
+    --dim: #e9ecf0;
+    --outline: #bec7d2;
+    --outline-var: #d9dee4;
+    --placeholder: #8794aa;
+    --blue: #236ffa;
+    --blue-c: #d8ecff;
+    --on-blue-c: #163b92;
+    --blue-panel: rgba(216, 236, 255, .48);
+    --blue-tint: #edf0ff;
+    --java: #0a9fb0;
+    --gold: #93683b;
+    --shadow-card: 0 8px 24px rgba(0,0,0,.05);
+    --shadow-soft: 0 12px 34px rgba(0,0,0,.07);
+    --font: "Onest", Arial, sans-serif;
+    --content: 1200px;
+    --side: 24px;
+    --header-side: 56px;
+    --header: 72px;
+    --panel: minmax(360px, 480px);
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body { margin: 0; height: 100dvh; overflow: hidden; font-family: var(--font); color: var(--ink); background: var(--bright); font-size: 16px; line-height: 24px; font-weight: 400; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; }
+  a { color: var(--blue); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; border: 1px solid transparent; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; background: transparent; color: var(--blue); transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease; }
+  .btn-44 { min-height: 44px; padding: 12px 24px; font-size: 14px; line-height: 20px; }
+  .btn.primary { border: 0; background: var(--blue); color: #fff; }
+  .btn.primary:hover { background: color-mix(in srgb, var(--blue) 92%, var(--on-blue-c) 8%); }
+  .btn.cta {
+    flex-direction: column; gap: 2px; align-items: center; justify-content: center;
+    min-height: 64px; padding: 12px 40px; white-space: normal; text-align: center;
+  }
+  .btn.cta .cta-title { font-size: 16px; line-height: 22px; font-weight: 600; color: #fff; }
+  .btn.cta .cta-sub { font-size: 13px; line-height: 18px; font-weight: 500; color: rgba(255,255,255,.72); }
+  .lnk { color: var(--blue); font-weight: 600; text-decoration: none; }
+  .lnk:hover { color: var(--on-blue-c); }
+  .lnk.u { text-decoration: underline; font-weight: 400; }
+  .avatar { display: inline-grid; place-items: center; border-radius: 9999px; background: var(--blue-c); color: var(--on-blue-c); font-weight: 600; flex: none; }
+  .avatar.a40 { width: 44px; height: 44px; font-size: 14px; line-height: 20px; }
+  .avatar.user { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--outline); }
+  .tabs { display: flex; gap: 24px; align-items: center; }
+  .tabs a { padding: 8px 0; color: #8794aa; text-decoration: none; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .tabs a:hover { color: var(--ink); }
+  .tabs a.on { color: #000; box-shadow: inset 0 -2px 0 var(--blue); }
+
+  .site-header { position: sticky; top: 0; z-index: 10; flex: none; height: var(--header); background: #fff; border-bottom: 1px solid var(--outline-var); }
+  .bar { height: 100%; margin: 0 auto; padding: 0 var(--header-side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
+  .logo { display: flex; align-items: center; justify-self: start; }
+  .logo img { display: block; width: 204px; height: 26px; object-fit: contain; object-position: left center; }
+  .actions { grid-column: 3; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+  .account { display: inline-flex; align-items: center; height: 44px; color: #8794aa; text-decoration: none; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .account:hover { color: var(--ink); }
+  .account.on { color: var(--blue); }
+  .profile-link { display: inline-flex; border-radius: 9999px; }
+  .profile-link:hover .avatar.user { box-shadow: inset 0 0 0 1px var(--ink); }
+
+  .checkout { flex: 1 1 auto; display: grid; grid-template-columns: var(--panel) minmax(0, 1fr); min-height: 0; overflow: hidden; }
+  .checkout-info {
+    display: flex; flex-direction: column; justify-content: flex-start;
+    min-height: 0; overflow: hidden;
+    padding: 32px clamp(24px, 4vw, 56px) 24px;
+    background: #fff;
+  }
+  .lead { margin: 0; color: var(--on-var); font-size: 16px; line-height: 24px; max-width: 36ch; }
+  .checkout-info h1 { margin: 0 0 20px; font-size: 40px; line-height: 48px; font-weight: 600; }
+  .features { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; max-width: 42ch; }
+  .features li {
+    position: relative; padding-left: 18px;
+    color: var(--ink); font-size: 16px; line-height: 24px;
+  }
+  .features li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--ink);
+  }
+  .checkout-actions { margin-top: auto; display: flex; flex-direction: column; align-items: stretch; padding-top: 24px; width: 100%; }
+  .checkout-info .btn.cta { width: 100%; flex: none; }
+  .legal {
+    margin: 12px 0 0; max-width: 42ch;
+    color: var(--on-var); font-size: 12px; line-height: 18px; letter-spacing: .1px;
+  }
+  .legal .lnk { font-weight: 600; font-size: inherit; }
+
+  .checkout-visual { position: relative; min-height: 0; background: var(--dim); overflow: hidden; }
+  .checkout-visual img {
+    display: block; width: 100%; height: 100%;
+    object-fit: cover; object-position: 55% center;
+  }
+
+  .checkout-info.loading {
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .checkout-info.loading h1 { margin: 0; font-size: 32px; line-height: 40px; }
+  .loading-status { margin: 0; color: var(--on-var); font-size: 16px; line-height: 24px; }
+  .progress {
+    width: min(280px, 100%); height: 4px; margin-top: 20px;
+    border-radius: 9999px; background: var(--dim); overflow: hidden;
+  }
+  .progress-bar {
+    width: 0; height: 100%; border-radius: inherit;
+    background: var(--blue);
+    transition: width linear;
+  }
+
+  @media (max-width: 1024px) {
+    :root { --side: 16px; --header-side: 16px; }
+    .tabs { display: none; }
+    .bar { grid-template-columns: minmax(0, 1fr) auto; }
+    .actions { grid-column: 2; }
+    .checkout { grid-template-columns: 1fr; grid-template-rows: minmax(0, 34%) minmax(0, 1fr); }
+    .checkout-visual { order: -1; }
+    .checkout-info { padding: 20px 16px 16px; }
+    .checkout-info h1 { font-size: 28px; line-height: 32px; margin-bottom: 12px; }
+    .features { gap: 6px; }
+    .features li { font-size: 14px; line-height: 20px; }
+    .features li::before { top: 7px; }
+    .checkout-actions { padding-top: 16px; width: 100%; }
+    .checkout-info .btn.cta { width: 100%; padding-inline: 20px; }
+  }
+  @media (max-width: 420px) {
+    .actions { gap: 8px; }
+    .account .label { display: none; }
+    .lead { font-size: 14px; line-height: 20px; }
+    .checkout-info h1 { font-size: 24px; line-height: 28px; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header" id="header">
+  <div class="bar">
+    <a class="logo" href="https://health.genotek.ru/consultation/">
+      <img src="assets/genotek_health.svg" width="204" height="26" alt="Genotek Здоровье">
+    </a>
+    <nav class="tabs" aria-label="Разделы">
+      <a class="on" href="subscriptions.html" aria-current="page">Подписки</a>
+      <a href="https://health.genotek.ru/consultation/">Онлайн-консультации</a>
+    </nav>
+    <div class="actions">
+      <a class="account" href="medcard.html">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 9h8M8 12.5h8M8 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="label">Медкарта</span>
+      </a>
+      <a class="profile-link" href="medcard.html#profile" aria-label="Профиль">
+        <span class="avatar a40 user" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 20c1.3-3.4 4.2-5 7.5-5s6.2 1.6 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="checkout">
+  <section class="checkout-info" id="checkout-form" aria-labelledby="plan-title">
+    <p class="lead">Консультируйтесь в Genotek Здоровье по выгодным ценам.</p>
+    <h1 id="plan-title"></h1>
+    <ul class="features" id="plan-features"></ul>
+    <div class="checkout-actions">
+      <a class="btn btn-cta primary cta" id="buy-btn" href="https://genotek.ru/">
+        <span class="cta-title" id="cta-title"></span>
+        <span class="cta-sub">и начать консультацию</span>
+      </a>
+      <p class="legal">
+        <a class="lnk" href="https://storage.yandexcloud.net/health-legal/kyaz_oferta_podpiska.pdf">Подробнее…</a>
+        Нажимая «Купить за…», вы соглашаетесь с тем, что услуга может быть оказана одной из партнёрских клиник в соответствии с условиями её оферты.
+      </p>
+    </div>
+  </section>
+  <section class="checkout-info loading" id="checkout-loading" aria-labelledby="loading-title" aria-live="polite" hidden>
+    <h1 id="loading-title">Покупка пакета</h1>
+    <p class="loading-status">Ждем списания денежных средств</p>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Ожидание оплаты">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+  </section>
+  <aside class="checkout-visual" aria-hidden="true">
+    <img src="assets/subscription-hero.jpg" width="1200" height="1200" alt="">
+  </aside>
+</main>
+<script>
+const REDIRECT_URL = "https://genotek.ru/";
+const LOAD_MS = 2800;
+const DEFAULT_PLAN = "summer";
+
+const PLANS = {
+  summer: {
+    title: "Здоровое лето",
+    price: "Купить за 14 980 ₽",
+    items: [
+      "4 консультации (все специалисты кроме ветеринаров/психологов/нутрициологов/специалистов по подбору врача и клиники)",
+      "Неограниченные экспресс-консультации (дежурные терапевты/педиатры)",
+      "Длительность — 90 дней",
+      "Вы экономите на консультациях более 30%"
+    ]
+  },
+  psych: {
+    title: "Мой психолог",
+    price: "Купить за 9 028 ₽",
+    items: [
+      "3 консультации психолога",
+      "Длительность — 180 дней",
+      "Вы экономите на консультациях до 30%"
+    ]
+  },
+  men: {
+    title: "Мужское здоровье",
+    price: "Купить за 7 348 ₽",
+    items: [
+      "3 консультации (терапевты/дерматовенерологи/урологи/кардиологи)",
+      "Неограниченные экспресс-консультации (дежурные терапевты)",
+      "Автопродление каждый месяц",
+      "Вы экономите более 20%"
+    ]
+  },
+  joints: {
+    title: "Здоровые суставы",
+    price: "Купить за 8 225 ₽",
+    items: [
+      "5 консультаций (инфекционисты/ревматологи/ЛОРы/терапевты/травматологи-ортопеды)",
+      "Неограниченные экспресс-консультации (дежурные терапевты)",
+      "Автопродление каждый месяц",
+      "Вы экономите более 1456 ₽ в месяц"
+    ]
+  },
+  gut: {
+    title: "Здоровый ЖКТ",
+    price: "Купить за 9 600 ₽",
+    items: [
+      "3 консультации: 1 гастроэнтеролог, 1 эндокринолог, 1 нутрициолог",
+      "Неограниченные экспресс-консультации (дежурные терапевты)",
+      "Вы экономите 20%"
+    ]
+  },
+  women: {
+    title: "Женское здоровье",
+    price: "Купить за 11 235 ₽",
+    items: [
+      "3 консультации (терапевты/дерматовенерологи/урологи/гинекологи)",
+      "Неограниченные экспресс-консультации (дежурные терапевты)",
+      "Автопродление каждый месяц",
+      "Вы экономите до 30%"
+    ]
+  },
+  unlimited: {
+    title: "Безлимитные консультации",
+    price: "Купить за 9 363 ₽",
+    items: [
+      "Неограниченные экспресс-консультации (дежурные терапевты/педиатры)",
+      "+ 5 обычных консультаций (все специалисты кроме психологов, нутрициологов и терапевта-генетика)",
+      "Автопродление каждый месяц",
+      "Вы экономите на консультациях более 30%"
+    ]
+  },
+  always: {
+    title: "Всегда на связи",
+    price: "Купить за 10 486 ₽",
+    items: [
+      "4 консультации (все специалисты кроме психологов, нутрициологов и терапевта-генетика)",
+      "Неограниченные экспресс-консультации (дежурные терапевты)",
+      "Автопродление каждый месяц",
+      "Вы экономите 20%"
+    ]
+  },
+  kids: {
+    title: "Детское здоровье",
+    price: "Купить за 3 429 ₽",
+    items: [
+      "2 консультации (педиатры/детские неврологи/дерматологи/инфекционисты)",
+      "Неограниченные экспресс-консультации (дежурные педиатры)",
+      "Автопродление каждый месяц",
+      "Вы экономите до 30%"
+    ]
+  }
+};
+
+const params = new URLSearchParams(location.search);
+const planId = PLANS[params.get("plan")] ? params.get("plan") : DEFAULT_PLAN;
+const plan = PLANS[planId];
+
+document.title = `${plan.title} — оформление подписки | Genotek Здоровье`;
+document.getElementById("plan-title").textContent = plan.title;
+document.getElementById("cta-title").textContent = plan.price;
+document.getElementById("plan-features").innerHTML = plan.items.map((item) => `<li>${item}</li>`).join("");
+
+const buyBtn = document.getElementById("buy-btn");
+const form = document.getElementById("checkout-form");
+const loading = document.getElementById("checkout-loading");
+const bar = document.getElementById("progress-bar");
+const progress = loading.querySelector(".progress");
+
+buyBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  form.hidden = true;
+  loading.hidden = false;
+  progress.setAttribute("aria-valuenow", "0");
+  requestAnimationFrame(() => {
+    bar.style.transitionDuration = `${LOAD_MS}ms`;
+    bar.style.width = "100%";
+    progress.setAttribute("aria-valuenow", "100");
+  });
+  window.setTimeout(() => {
+    window.location.href = REDIRECT_URL;
+  }, LOAD_MS);
+});
+</script>
+</body>
+</html>
