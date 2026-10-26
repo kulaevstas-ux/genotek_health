@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Медкарта | Genotek Здоровье</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000000;
+    --on-var: #595f74;
+    --surface: #f6f7f8;
+    --bright: #ffffff;
+    --dim: #e9ecf0;
+    --outline: #bec7d2;
+    --outline-var: #d9dee4;
+    --placeholder: #8794aa;
+    --blue: #236ffa;
+    --blue-c: #d8ecff;
+    --on-blue-c: #163b92;
+    --blue-panel: rgba(216, 236, 255, .48);
+    --blue-tint: #edf0ff;
+    --java: #0a9fb0;
+    --java-c: #d0fdfc;
+    --success-c: #e5f9df;
+    --on-success-c: #244c1b;
+    --orange: #f04906;
+    --orange-c: #ffebd4;
+    --gold: #93683b;
+    --error: #fc0606;
+    --shadow-card: 0 8px 24px rgba(0,0,0,.05);
+    --shadow-soft: 0 12px 34px rgba(0,0,0,.07);
+    --shadow-pop: 0 16px 48px rgba(0,0,0,.12);
+    --font: "Onest", Arial, sans-serif;
+    --content: 1200px;
+    --side: 24px;
+    --nav: 280px;
+    --header: 72px;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bright); font-size: 16px; line-height: 24px; font-weight: 400; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); }
+  button, input { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; border: 1px solid transparent; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; background: transparent; color: var(--blue); transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease; }
+  .btn-44 { min-height: 44px; padding: 12px 24px; font-size: 14px; line-height: 20px; }
+  .btn-32 { min-height: 32px; padding: 8px 20px; font-size: 12px; line-height: 16px; }
+  .btn.primary { border: 0; background: var(--blue); color: #fff; }
+  .btn.primary:hover { background: color-mix(in srgb, var(--blue) 92%, var(--on-blue-c) 8%); }
+  .btn.primary:active { background: color-mix(in srgb, var(--blue) 90%, var(--on-blue-c) 10%); }
+  .btn.outline { background: #fff; color: var(--blue); border-color: var(--blue); }
+  .btn.outline:hover { background: color-mix(in srgb, var(--on-blue-c) 8%, #fff); }
+  .btn.ghost { background: transparent; color: var(--blue); padding-inline: 16px; }
+  .btn.ghost:hover { background: color-mix(in srgb, var(--on-blue-c) 8%, transparent); }
+  .btn.dark { border: 0; background: #000; color: #fff; }
+  .btn.dark:hover { background: color-mix(in srgb, #000 88%, #fff 12%); }
+  .lnk { color: var(--blue); font-weight: 600; text-decoration: none; }
+  .lnk:hover { color: var(--on-blue-c); }
+  .lnk.s { font-size: 14px; line-height: 20px; }
+  .lnk.u { text-decoration: underline; font-weight: 400; }
+  .avatar { display: inline-grid; place-items: center; border-radius: 9999px; background: var(--blue-c); color: var(--on-blue-c); font-weight: 600; flex: none; }
+  .avatar.a64 { width: 64px; height: 64px; font-size: 22px; line-height: 28px; }
+  .avatar.a40 { width: 44px; height: 44px; font-size: 14px; line-height: 20px; }
+  .avatar.user { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--outline); }
+  .tabs { display: flex; gap: 24px; align-items: center; }
+  .tabs a { padding: 8px 0; color: #8794aa; text-decoration: none; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .tabs a:hover { color: var(--ink); }
+  .tabs a.on { color: #000; box-shadow: inset 0 -2px 0 var(--blue); }
+  .sep { height: 1px; background: color-mix(in srgb, var(--ink) 10%, transparent); border: 0; margin: 24px 0; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 9999px; background: var(--dim); font-weight: 700; font-size: 11px; line-height: 14px; color: var(--ink); white-space: nowrap; }
+  .badge.m { padding: 6px 12px 6px 8px; font-size: 12px; line-height: 16px; }
+  .badge.ok { background: var(--success-c); color: var(--on-success-c); }
+  .input { height: 48px; border: 1px solid var(--outline); border-radius: 8px; background: #fff; padding: 0 12px; font: 400 16px/24px var(--font); color: var(--ink); width: 100%; }
+  .input:hover { border-color: var(--ink); }
+  .input::placeholder { color: var(--placeholder); }
+  .input:focus { outline: none; border-color: var(--blue); }
+  .toast { position: fixed; right: 24px; bottom: 24px; z-index: 30; width: min(360px, calc(100vw - 32px)); min-height: 56px; padding: 16px 20px; border-radius: 20px; background: #fff; box-shadow: var(--shadow-pop); display: flex; align-items: flex-start; gap: 12px; }
+  .toast strong { font-size: 16px; line-height: 22px; font-weight: 600; }
+  .toast p { margin: 4px 0 0; color: var(--on-var); font-size: 14px; line-height: 20px; }
+  .toast .x { margin-left: auto; border: 0; background: transparent; color: var(--blue); cursor: pointer; font: 600 14px/20px var(--font); }
+
+  .site-header { position: sticky; top: 0; z-index: 10; height: var(--header); background: #fff; border-bottom: 1px solid var(--outline-var); }
+  .bar { max-width: calc(var(--content) + 2 * var(--side)); height: 100%; margin: 0 auto; padding: 0 var(--side); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 32px; }
+  .logo { display: flex; align-items: center; justify-self: start; }
+  .logo img { display: block; width: 204px; height: 26px; object-fit: contain; object-position: left center; }
+  .actions { grid-column: 3; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+  .account { display: inline-flex; align-items: center; height: 44px; color: #8794aa; text-decoration: none; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .account:hover { color: var(--ink); }
+  .account.on { color: var(--blue); }
+  .profile-link { display: inline-flex; border-radius: 9999px; }
+  .profile-link:hover .avatar.user { box-shadow: inset 0 0 0 1px var(--ink); }
+  .wrap { max-width: calc(var(--content) + 2 * var(--side)); margin: 0 auto; padding: 40px var(--side) 80px; }
+
+  .layout { display: grid; grid-template-columns: var(--nav) minmax(0, 1fr); gap: 32px; align-items: start; }
+  .layout > * { min-width: 0; }
+  .back { display: none; align-items: center; gap: 8px; min-height: 44px; margin: -8px 0 8px; color: var(--ink); text-decoration: none; font-size: 16px; line-height: 24px; font-weight: 600; }
+  .back:hover { color: var(--blue); }
+  .side { position: sticky; top: calc(var(--header) + 40px); }
+  .side h1 { margin: 0 0 20px; font-size: 40px; line-height: 48px; font-weight: 600; }
+  .side-nav { display: flex; flex-direction: column; gap: 4px; padding: 8px; border-radius: 24px; background: var(--blue-panel); }
+  .side-nav a { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 12px 16px; border-radius: 16px; color: var(--ink); text-decoration: none; font-size: 16px; line-height: 22px; font-weight: 600; }
+  .side-nav a:hover { background: rgba(255,255,255,.6); }
+  .side-nav a.on { background: #fff; box-shadow: var(--shadow-card); }
+  .side .btn { margin-top: 20px; width: 100%; }
+  .panel { display: flex; flex-direction: column; gap: 16px; }
+  .panel > h2 { margin: 0; font-size: 32px; line-height: 40px; font-weight: 600; }
+  .card { background: var(--blue-panel); border: 0; border-radius: 24px; padding: 28px; }
+  .card h3 { margin: 0; font-size: 24px; line-height: 28px; font-weight: 600; }
+  .card p { margin: 0; color: var(--on-var); }
+
+  .consult { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: start; padding: 24px; background: #fff; box-shadow: inset 0 0 0 1px #dfe5f4; transition: box-shadow 120ms ease; }
+  .consult:hover { box-shadow: inset 0 0 0 1px #dfe5f4, var(--shadow-soft); }
+  .consult h3 { font-size: 20px; line-height: 24px; }
+  .consult .doctor { margin-top: 8px; color: var(--ink); font-size: 16px; line-height: 22px; font-weight: 600; }
+  .consult .clinic { margin-top: 4px; font-size: 14px; line-height: 20px; letter-spacing: .1px; }
+  .consult .badge { margin-top: 12px; }
+  .consult time { padding: 6px 10px; border-radius: 9999px; background: var(--blue-tint); color: var(--blue); font-size: 12px; line-height: 16px; font-weight: 600; white-space: nowrap; }
+  .consult-link { position: absolute; inset: 0; border-radius: 24px; }
+
+  .promo { padding: 40px; border-radius: 28px; background: linear-gradient(90deg, #4a80ff, #33d3d3); color: #fff; }
+  .promo h3 { font-size: 32px; line-height: 40px; }
+  .promo .text { margin-top: 12px; max-width: 46ch; color: #fff; }
+  .promo .text .lnk { color: #fff; text-decoration: underline; }
+  .promo .text .lnk:hover { color: rgba(255,255,255,.84); }
+  .promo .btn { margin-top: 20px; background: #fff; color: var(--ink); }
+  .promo .btn:hover { background: rgba(255,255,255,.88); }
+  .nowrap { white-space: nowrap; }
+  .promo .hint { margin-top: 8px; color: rgba(255,255,255,.8); font-size: 12px; line-height: 16px; letter-spacing: .2px; }
+
+  #conclusion .card { background: #fff; box-shadow: inset 0 0 0 1px #dfe5f4; }
+  .report-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: start; }
+  .report-head .doctor { margin-top: 8px; color: var(--ink); font-size: 16px; line-height: 22px; font-weight: 600; }
+  .report-head .clinic { margin-top: 4px; font-size: 14px; line-height: 20px; letter-spacing: .1px; }
+  .report-head time { padding: 6px 10px; border-radius: 9999px; background: var(--blue-tint); color: var(--blue); font-size: 12px; line-height: 16px; font-weight: 600; white-space: nowrap; }
+  .report-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .report-section { margin-top: 12px; padding: 20px 24px; border-radius: 18px; background: var(--blue-panel); }
+  .report-head + .report-section { margin-top: 24px; }
+  .report-section h4 { margin: 0 0 8px; font-size: 16px; line-height: 22px; font-weight: 600; }
+  .report-section p { color: var(--ink); font-size: 14px; line-height: 21px; }
+  .report-foot { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+  .report-foot .btn { width: 100%; }
+
+  .doc-row { display: flex; gap: 16px; align-items: center; background: #fff; box-shadow: inset 0 0 0 1px #dfe5f4; padding: 24px; }
+  .doc-row .avatar { background: linear-gradient(-16deg, rgba(85,171,255,.6) 22%, rgba(216,236,255,.6) 98%); }
+  .doc-row .info { flex: 1; min-width: 0; }
+  .doc-row .spec { display: block; color: var(--on-var); font-size: 12px; line-height: 16px; letter-spacing: .2px; font-weight: 400; }
+  .doc-row h3 { margin-top: 8px; font-size: 16px; line-height: 22px; }
+  .doc-row .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; color: var(--ink); font-size: 12px; line-height: 16px; font-weight: 600; }
+  .doc-row .meta li { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 9999px; background: var(--blue-tint); }
+  .doc-row .meta svg { color: var(--gold); }
+  .doc-row .btn { flex: none; }
+
+  .profile-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; max-width: 672px; }
+  .profile-form .wide { grid-column: 1 / -1; }
+  .field { display: flex; flex-direction: column; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; }
+  .field label, .field legend { padding: 0; color: var(--placeholder); font-size: 14px; line-height: 20px; letter-spacing: .1px; }
+  .field legend { margin-bottom: 8px; }
+  .field .req { color: var(--error); }
+  .field .input[aria-invalid="true"] { border-color: var(--error); }
+  .field .hint { color: var(--on-var); font-size: 12px; line-height: 16px; letter-spacing: .2px; }
+  .field .err { color: var(--error); font-size: 12px; line-height: 16px; letter-spacing: .2px; }
+  .seg { display: flex; gap: 8px; }
+  .seg label { flex: 1; position: relative; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg span { display: grid; place-items: center; height: 48px; padding: 0 20px; border: 1px solid var(--outline); border-radius: 9999px; background: #fff; color: var(--ink); font-size: 14px; line-height: 20px; font-weight: 600; cursor: pointer; }
+  .seg span:hover { border-color: var(--ink); }
+  .seg input:checked + span { border-color: transparent; background: #000; color: #fff; }
+  .seg input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .profile-form .btn { justify-self: start; margin-top: 8px; }
+  .btn.primary:disabled { opacity: .48; cursor: not-allowed; }
+
+  .empty { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .empty .glyph { width: 48px; height: 48px; border-radius: 15px; background: var(--blue-tint); color: var(--blue); display: grid; place-items: center; margin-bottom: 8px; }
+  .empty .btn { margin-top: 8px; }
+  .plans { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .plan { display: flex; flex-direction: column; min-height: 360px; padding: 24px; border-radius: 22px; background: var(--grad); color: #fff; }
+  .plan h3 { margin: 0; font-size: 22px; line-height: 28px; font-weight: 600; }
+  .plan ul { margin: 16px 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 20px; letter-spacing: .1px; }
+  .plan .btn { margin-top: auto; width: 100%; border: 0; background: #fff; color: var(--accent); }
+  .plan .btn:hover { background: rgba(255,255,255,.88); }
+  .plans-foot { align-self: center; color: var(--blue); font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; }
+  .plans-foot:hover { color: var(--on-blue-c); }
+
+  .support { display: flex; flex-direction: column; gap: 12px; }
+  .support p { color: var(--ink); max-width: 640px; }
+  .support .account-id { align-self: flex-start; padding: 10px 16px; border-radius: 9999px; background: #fff; font-size: 14px; line-height: 20px; }
+  .support .account-id b { font-weight: 600; }
+  .support-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .promo-card h3 { font-size: 24px; line-height: 28px; }
+  .promo-card > p { margin-top: 8px; color: var(--ink); max-width: 480px; }
+  .promo-form { display: flex; gap: 8px; margin-top: 20px; max-width: 480px; }
+  .promo-form .input { flex: 1; min-width: 0; }
+  .promo-form .input[aria-invalid="true"] { border-color: var(--error); }
+  .promo-form .btn { flex: none; min-height: 48px; }
+  .promo-card .promo-err { margin-top: 8px; color: var(--error); font-size: 12px; line-height: 16px; letter-spacing: .2px; }
+  .coupon-glyph { width: 56px; height: 56px; border-radius: 16px; background: #fff; color: var(--blue); display: grid; place-items: center; flex: none; }
+  .promo-empty { display: flex; align-items: center; gap: 16px; }
+  .promo-empty b { display: block; font-size: 16px; line-height: 22px; font-weight: 600; }
+  .promo-empty div span { display: block; margin-top: 4px; color: var(--on-var); font-size: 14px; line-height: 20px; letter-spacing: .1px; }
+  .promo-list { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .promo-list li { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 18px; background: #fff; }
+  .promo-list .coupon-glyph { width: 44px; height: 44px; border-radius: 14px; background: var(--blue-tint); }
+  .promo-list .info { flex: 1; min-width: 0; }
+  .promo-list .info b { display: block; font-size: 16px; line-height: 22px; font-weight: 600; }
+  .promo-list .info span { display: block; color: var(--on-var); font-size: 14px; line-height: 20px; letter-spacing: .1px; }
+
+  .modal { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 48px); padding: 32px; border: 0; border-radius: 28px; background: #fff; color: var(--ink); box-shadow: var(--shadow-pop); overflow: visible; }
+  .modal:focus { outline: none; }
+  .modal::backdrop { background: rgba(0,0,0,.32); }
+  .modal h2 { margin: 0 40px 24px 0; font-size: 24px; line-height: 28px; font-weight: 600; }
+  .modal .close { position: absolute; z-index: 3; top: 20px; right: 20px; width: 44px; height: 44px; border: 1px solid var(--outline); border-radius: 9999px; background: #fff; color: var(--ink); cursor: pointer; display: grid; place-items: center; }
+  .modal .close:hover { border-color: var(--ink); }
+  .rate { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; margin: 0 0 16px; padding: 16px 20px; border: 0; border-radius: 18px; background: var(--blue-panel); min-width: 0; }
+  .rate legend { float: left; padding: 0; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .rate legend small { display: block; margin-top: 4px; color: var(--on-var); font-weight: 400; font-size: 12px; line-height: 16px; letter-spacing: .2px; }
+  .rate legend .req { color: var(--on-var); font-weight: 400; }
+  .stars { display: flex; gap: 4px; }
+  .star { position: relative; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9999px; color: var(--outline); cursor: pointer; }
+  .star input { position: absolute; opacity: 0; pointer-events: none; }
+  .star.fill { color: var(--gold); }
+  .star:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 0; }
+  .star .tip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 2; display: none; white-space: nowrap; background: #000; color: #fff; font-size: 12px; line-height: 16px; font-weight: 600; padding: 6px 10px; border-radius: 9999px; pointer-events: none; }
+  .star .tip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border: 5px solid transparent; border-top-color: #000; }
+  .star:hover .tip, .star:has(input:focus-visible) .tip { display: block; }
+  .field-label { display: block; margin: 24px 0 8px; font-weight: 600; font-size: 16px; line-height: 22px; }
+  .field-label span { color: var(--on-var); font-weight: 400; }
+  .textarea { display: block; width: 100%; min-height: 96px; padding: 12px; border: 1px solid var(--outline); border-radius: 8px; font: 400 16px/24px var(--font); color: var(--ink); resize: vertical; }
+  .textarea:hover { border-color: var(--ink); }
+  .textarea::placeholder { color: var(--placeholder); }
+  .textarea:focus { outline: none; border-color: var(--blue); }
+  .modal .btn.primary { width: 100%; margin-top: 24px; }
+  .modal.chat { width: min(520px, calc(100vw - 32px)); }
+  .chat-body h2 { margin: 0 40px 12px 0; }
+  .chat-body p { margin: 0; color: var(--ink); }
+  .chat-body p + p { margin-top: 12px; }
+  .tel { display: flex; gap: 8px; margin-top: 24px; }
+  .tel-field { display: flex; align-items: center; flex: 1; min-width: 0; height: 48px; border: 1px solid var(--outline); border-radius: 8px; background: #fff; }
+  .tel-field:hover { border-color: var(--ink); }
+  .tel-field:focus-within { border-color: var(--blue); }
+  .tel-code { display: flex; align-items: center; gap: 6px; height: 100%; padding: 0 12px; border-right: 1px solid var(--outline-var); font-size: 16px; line-height: 24px; color: var(--ink); flex: none; }
+  .tel-code .flag { width: 20px; height: 14px; border-radius: 2px; background: linear-gradient(#fff 0 33.3%, #0039a6 33.3% 66.6%, #d52b1e 66.6%); box-shadow: inset 0 0 0 1px var(--outline-var); }
+  .tel-field input { flex: 1; min-width: 0; height: 100%; border: 0; padding: 0 12px; background: transparent; font: 400 16px/24px var(--font); color: var(--ink); }
+  .tel-field input:focus { outline: none; }
+  .tel-field input::placeholder { color: var(--placeholder); }
+  .modal .tel .btn.primary { width: auto; margin-top: 0; flex: none; min-height: 48px; }
+  .modal.done { width: min(420px, calc(100vw - 32px)); text-align: center; }
+  .done-icon { width: 80px; height: 80px; margin: 8px auto 20px; border-radius: 24px; background: var(--success-c); color: #3b9625; display: grid; place-items: center; }
+  .modal.done h2 { margin: 0; }
+  .modal.done p { margin: 8px 0 0; color: var(--on-var); }
+
+  footer { background: #fff; border-top: 1px solid color-mix(in srgb, var(--ink) 40%, transparent); }
+  .foot { max-width: calc(var(--content) + 2 * var(--side)); margin: 0 auto; padding: 64px var(--side) 32px; color: var(--ink); font-size: 11px; line-height: 17px; }
+  .foot-brand { display: inline-flex; }
+  .foot-brand img { display: block; width: 202px; height: 25px; }
+  .foot-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
+  .foot-links .lnk { color: var(--ink); font-size: 13px; line-height: 20px; }
+  .foot-links .lnk:hover { color: var(--blue); }
+  .foot .sep { margin: 24px 0; }
+  .fine p { margin: 8px 0 0; max-width: 90ch; }
+  .fine p:first-child { margin-top: 0; font-weight: 700; }
+  .fine .lnk.u { color: var(--ink); }
+  .fine .lnk.u:hover { color: var(--blue); }
+  .fine .badge { padding: 2px 6px; font-size: 10px; line-height: 12px; }
+  .reqs summary { cursor: pointer; font-weight: 700; font-size: 14px; line-height: 20px; color: var(--ink); }
+  .reqs dl { display: grid; grid-template-columns: 200px 1fr; gap: 8px 16px; margin: 16px 0 0; }
+  .reqs dt { color: var(--on-var); font-size: 12px; line-height: 16px; }
+  .reqs dd { margin: 0; color: var(--ink); font-size: 12px; line-height: 16px; }
+
+  @media (max-width: 1024px) {
+    :root { --side: 16px; }
+    .tabs { display: none; }
+    .bar { grid-template-columns: minmax(0, 1fr) auto; }
+    .actions { grid-column: 2; }
+    .wrap { padding-top: 24px; }
+    .layout { grid-template-columns: 1fr; gap: 16px; }
+    .side { position: static; }
+    .side h1 { margin-bottom: 16px; font-size: 28px; line-height: 32px; }
+    .panel > h2 { font-size: 24px; line-height: 28px; }
+    .back { display: inline-flex; }
+    .side-nav { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 8px; margin: 0 calc(-1 * var(--side)); padding: 0 var(--side); border-radius: 0; background: none; scroll-padding-inline: var(--side); scrollbar-width: none; }
+    .side-nav::-webkit-scrollbar { display: none; }
+    .side-nav a { flex: none; min-height: 44px; padding: 12px 20px; border: 1px solid var(--outline); border-radius: 9999px; background: #fff; font-size: 14px; line-height: 20px; white-space: nowrap; }
+    .side-nav a:hover { background: #fff; border-color: var(--ink); }
+    .side-nav a.on { border-color: transparent; background: #000; color: #fff; box-shadow: none; }
+    .side .btn { display: none; }
+    .promo h3 { font-size: 24px; line-height: 28px; }
+    .reqs dl { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .actions { gap: 8px; }
+    .card { padding: 20px; border-radius: 20px; }
+    .consult { grid-template-columns: auto minmax(0, 1fr); padding: 20px; }
+    .consult time { grid-column: 2; grid-row: 1; justify-self: end; align-self: start; }
+    .consult .body { grid-column: 1 / -1; }
+    .report-head { grid-template-columns: auto minmax(0, 1fr); }
+    .report-head time { grid-column: 2; grid-row: 1; justify-self: end; align-self: start; }
+    .report-head .body { grid-column: 1 / -1; }
+    .report-actions .btn { flex: 1 1 100%; }
+    .report-section { padding: 16px; }
+    .promo { padding: 24px 20px; }
+    .profile-form { grid-template-columns: 1fr; gap: 20px; }
+    .profile-form .btn { width: 100%; }
+    .promo-form { flex-direction: column; }
+    .promo-form .input { flex: none; }
+    .doc-row { flex-wrap: wrap; padding: 20px; }
+    .doc-row .info { flex-basis: calc(100% - 80px); }
+    .doc-row .btn { width: 100%; }
+    .rate { grid-template-columns: 1fr; gap: 8px; }
+    .modal { padding: 24px 16px; border-radius: 24px; }
+    .modal .close { top: 12px; right: 12px; }
+    .tel { flex-direction: column; }
+    .tel-field { flex: none; }
+    .modal .tel .btn.primary { width: 100%; }
+    .foot { padding: 40px var(--side) 24px; }
+    .foot-brand img { width: 162px; height: 20px; }
+  }
+  @media (max-width: 420px) {
+    .account .label { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header" id="header">
+  <div class="bar">
+    <a class="logo" href="https://health.genotek.ru/consultation/">
+      <img src="assets/genotek_health.svg" width="204" height="26" alt="Genotek Здоровье">
+    </a>
+    <nav class="tabs" aria-label="Разделы">
+      <a href="https://health.genotek.ru/consultation/subscriptions-store">Подписки</a>
+      <a class="on" href="https://health.genotek.ru/consultation/">Онлайн-консультации</a>
+    </nav>
+    <div class="actions">
+      <a class="account on" href="medcard.html" aria-current="page">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 9h8M8 12.5h8M8 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="label">Медкарта</span>
+      </a>
+      <a class="profile-link" href="#profile" aria-label="Профиль">
+        <span class="avatar a40 user" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 20c1.3-3.4 4.2-5 7.5-5s6.2 1.6 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back" id="back" href="https://health.genotek.ru/consultation/">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Назад
+  </a>
+  <div class="layout">
+    <aside class="side">
+      <h1>Медкарта</h1>
+      <nav class="side-nav" id="side-nav" aria-label="Разделы медкарты"></nav>
+      <a class="btn btn-44 primary" href="https://health.genotek.ru/consultation/">Выбрать специалиста</a>
+    </aside>
+
+    <div>
+      <section class="panel" id="consultations" aria-label="Консультации">
+        <article class="card consult">
+          <span class="avatar a64" aria-hidden="true">АЗ</span>
+          <div class="body">
+            <h3>Дежурный дерматовенеролог (срочно)</h3>
+            <p class="doctor">Абдуллаева Зарина Меммеевна</p>
+            <p class="clinic">Клиника Генотек Здоровье</p>
+            <span class="badge m ok">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity=".16"/><path d="m8 12 3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Медзаключение готово
+            </span>
+          </div>
+          <time datetime="2026-01-02">02.01.2026</time>
+          <a class="consult-link" href="#conclusion" aria-label="Открыть медзаключение: дежурный дерматовенеролог, 02.01.2026"></a>
+        </article>
+
+        <article class="card promo">
+          <h3>Онлайн-консультации<br>в вашем смартфоне</h3>
+          <p class="text">Ваши консультации и медкарта всегда при вас с нашими приложениями для <a class="lnk" href="https://apps.apple.com/">iPhone</a> и <a class="lnk" href="https://play.google.com/">Android™</a></p>
+          <button class="btn btn-44 dark" type="button" id="send-link">Отправить ссылку на телефон</button>
+          <p class="hint">Ссылка будет отправлена на ваш номер <span class="nowrap">+7 967 ***-**-08</span></p>
+        </article>
+      </section>
+
+      <section class="panel" id="conclusion" aria-label="Медзаключение" hidden>
+        <article class="card">
+          <div class="report-head">
+            <span class="avatar a64" aria-hidden="true">АЗ</span>
+            <div class="body">
+              <h3>Дежурный дерматовенеролог (срочно)</h3>
+              <p class="doctor">Абдуллаева Зарина Меммеевна</p>
+              <p class="clinic">Клиника Генотек Здоровье</p>
+              <div class="report-actions">
+                <button class="btn btn-44 primary" type="button" id="rate-btn">Оценить консультацию</button>
+                <button class="btn btn-44 outline" type="button" id="chat-btn">История чата с врачом</button>
+              </div>
+            </div>
+            <time datetime="2026-01-02">02.01.2026</time>
+          </div>
+          <hr class="sep">
+          <section class="report-section">
+            <h4>Наиболее вероятные заболевания</h4>
+            <p>Дистанционное консультирование не заменяет и не равнозначно очному осмотру врача. Нижеприведённая информация не является назначением, а является медицинским информированием, носит исключительно справочный характер. С учётом информации, которую вы мне предоставили, можно предположить травмированный внутридермальный невус? Дерматофиброма?</p>
+          </section>
+          <section class="report-section">
+            <h4>Рекомендуемые анализы и исследования</h4>
+            <p>Для уточнения диагноза и исключения злокачественности образования в подобных случаях обычно рекомендуют очный осмотр с проведением дерматоскопии.</p>
+          </section>
+          <section class="report-section">
+            <h4>Рекомендуемые консультации специалистов</h4>
+            <p>Для точной диагностики и определения тактики дальнейшего лечения обычно рекомендуют обратиться к дерматологу на очный приём.</p>
+          </section>
+          <section class="report-section">
+            <h4>Информация о лекарственных препаратах</h4>
+            <p>В подобных случаях обычно назначают на этапе дообследования наружно для снятия воспаления Бетаметазона дипропионат + гентамицин (Акридерм Гента, Белогент) или Бетаметазона дипропионат + фузидовая кислота (Фуцикорт) крем для наружного применения наносить 2 раза в сутки тонким слоем на поражённые участки кожи в течение 5–7 дней.</p>
+          </section>
+          <section class="report-section">
+            <h4>Общие рекомендации</h4>
+            <p>Не обгорать! Не находиться под воздействием прямых солнечных лучей во время пикового УФ-излучения (в нашем регионе это с 11:30 до 14:30). Загорать допустимо в безопасные часы (обычно это с 7 до 11–12 и с 16 до 19), и так же обязательно с SPF. Использование солнцезащитных средств с SPF 50+, наносить крем заранее, за 20–30 минут до выхода на улицу, обновлять защиту раз в 1,5–2 часа, а также после каждой водной процедуры, применять защиту на всех открытых зонах, динамическое наблюдение с проведением профилактической дерматоскопии.</p>
+          </section>
+          <section class="report-section">
+            <h4>Рост (см)</h4>
+            <p>29</p>
+          </section>
+          <div class="report-foot">
+            <a class="btn btn-44 outline" href="https://market.yandex.ru/catalog--lekarstvennye-preparaty-i-bad/72412">Перейти в аптеку</a>
+            <a class="btn btn-44 ghost" href="#consultations">Свернуть</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel" id="doctors" aria-label="Мои врачи" hidden>
+        <article class="card doc-row">
+          <span class="avatar a64" aria-hidden="true">АЗ</span>
+          <div class="info">
+            <span class="spec">Дерматовенеролог</span>
+            <h3>Абдуллаева Зарина Меммеевна</h3>
+            <ul class="meta">
+              <li>Рейтинг 4,9 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></li>
+              <li>Стаж 12 лет</li>
+            </ul>
+          </div>
+          <a class="btn btn-44 outline" href="doctor.html">Записаться на приём</a>
+        </article>
+      </section>
+
+      <section class="panel" id="profile" aria-label="Профиль" hidden>
+        <article class="card">
+          <form class="profile-form" id="profile-form" novalidate>
+            <div class="field wide">
+              <label for="pf-name">Как к вам обращаться <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="pf-name" name="name" type="text" autocomplete="given-name" value="Антон" required aria-describedby="pf-name-err">
+              <span class="err" id="pf-name-err" hidden>Укажите имя</span>
+            </div>
+            <fieldset class="field">
+              <legend>Пол</legend>
+              <div class="seg">
+                <label><input type="radio" name="sex" value="m" checked><span>Мужской</span></label>
+                <label><input type="radio" name="sex" value="f"><span>Женский</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="pf-birth">Дата рождения</label>
+              <input class="input" id="pf-birth" name="birth" type="text" inputmode="numeric" autocomplete="bday" placeholder="ДД.ММ.ГГГГ" value="17.04.1996" aria-describedby="pf-birth-err">
+              <span class="err" id="pf-birth-err" hidden>Введите дату в формате ДД.ММ.ГГГГ</span>
+            </div>
+            <div class="field">
+              <label for="pf-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="pf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" value="+7 967 319-45-08" required aria-describedby="pf-phone-hint pf-phone-err">
+              <span class="hint" id="pf-phone-hint">Если вы измените номер, мы попросим подтвердить его по СМС</span>
+              <span class="err" id="pf-phone-err" hidden>Введите номер полностью</span>
+            </div>
+            <div class="field">
+              <label for="pf-email">Электронная почта</label>
+              <input class="input" id="pf-email" name="email" type="email" autocomplete="email" placeholder="example@yandex.ru" aria-describedby="pf-email-err">
+              <span class="err" id="pf-email-err" hidden>Проверьте адрес почты</span>
+            </div>
+            <button class="btn btn-44 primary wide" type="submit" id="pf-save" disabled>Сохранить изменения</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="panel" id="subscriptions" aria-label="Подписки" hidden>
+        <h2>Пакеты консультаций</h2>
+        <div class="plans" id="plans"></div>
+        <a class="plans-foot" href="https://health.genotek.ru/consultation/subscriptions-store">Оферта клиник-партнёров</a>
+      </section>
+
+      <section class="panel" id="support" aria-label="Поддержка" hidden>
+        <article class="card support">
+          <h3>Напишите нам, если возникли проблемы</h3>
+          <p>Обращаясь в поддержку, вы отправляете сообщение команде поддержки Genotek Здоровье, а не врачу, с которым проходили консультацию.</p>
+          <p class="account-id">Номер вашей учётной записи — <b>8751806</b></p>
+          <div class="support-actions">
+            <a class="btn btn-44 outline" href="https://t.me/genotek_health_service_bot" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 4 3 11l6 2.2M21 4l-3 16-7.5-5M21 4 9 13.2m0 0V19l3-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Telegram
+            </a>
+            <a class="btn btn-44 outline" href="https://health.genotek.ru/consultation/support-web/feedback.html" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Обратная связь
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel" id="promocode" aria-label="Промокод" hidden>
+        <article class="card promo-card">
+          <h3>Введите промокод</h3>
+          <p>Получите скидку на онлайн-консультацию или активируйте корпоративную подписку</p>
+          <form class="promo-form" id="promo-form" novalidate>
+            <input class="input" id="promo" type="text" placeholder="Промокод" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Промокод" aria-describedby="promo-err">
+            <button class="btn btn-44 primary" type="submit" id="promo-submit" disabled>Применить</button>
+          </form>
+          <p class="promo-err" id="promo-err" aria-live="polite" hidden></p>
+          <hr class="sep">
+          <div class="promo-empty" id="promo-empty">
+            <span class="coupon-glyph" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M15 6v12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/></svg>
+            </span>
+            <div>
+              <b>Нет действующих промокодов</b>
+              <span>Активируйте скидку — введите промокод в поле выше</span>
+            </div>
+          </div>
+          <ul class="promo-list" id="promo-list" aria-label="Действующие промокоды" hidden></ul>
+        </article>
+      </section>
+    </div>
+  </div>
+</main>
+
+<dialog class="modal" id="rate-modal" tabindex="-1" autofocus aria-labelledby="rate-title">
+  <button class="close" type="button" data-close aria-label="Закрыть">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <h2 id="rate-title">Оцените консультацию</h2>
+  <form id="rate-form">
+    <fieldset class="rate">
+      <legend>Как бы вы оценили врача?</legend>
+      <div class="stars" data-rate="doctor"></div>
+    </fieldset>
+    <fieldset class="rate">
+      <legend>Как бы вы оценили качество сервиса?<small>Время ожидания, качество связи, помогла ли консультация</small></legend>
+      <div class="stars" data-rate="service"></div>
+    </fieldset>
+    <label class="field-label" for="rate-comment">Оставьте комментарий <span>(необязательно)</span></label>
+    <textarea class="textarea" id="rate-comment" name="comment" placeholder="Напишите здесь, понравилась ли вам консультация"></textarea>
+    <button class="btn btn-44 primary" type="submit" id="rate-submit" disabled>Отправить отзыв</button>
+  </form>
+</dialog>
+
+<dialog class="modal chat" id="chat-modal" tabindex="-1" autofocus aria-labelledby="chat-title">
+  <button class="close" type="button" data-close aria-label="Закрыть">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <div class="chat-body">
+    <h2 id="chat-title">История чата в телефоне</h2>
+    <p>В данный момент история чата доступна только в мобильном приложении.</p>
+    <p>Мы отправим вам ссылку для загрузки приложения</p>
+    <form class="tel" id="chat-form" novalidate>
+      <label class="tel-field">
+        <span class="tel-code"><span class="flag" aria-hidden="true"></span>+7</span>
+        <input id="chat-phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="XXX XXX-XX-XX" aria-label="Номер телефона">
+      </label>
+      <button class="btn btn-44 primary" type="submit" id="chat-submit" disabled>Получить</button>
+    </form>
+  </div>
+</dialog>
+
+<dialog class="modal done" id="rate-done" tabindex="-1" autofocus aria-labelledby="rate-done-title">
+  <div class="done-icon" aria-hidden="true">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <h2 id="rate-done-title">Ваш отзыв отправлен</h2>
+  <p id="rate-done-text">Спасибо</p>
+  <button class="btn btn-44 primary" type="button" data-close>Закрыть</button>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden>
+  <div>
+    <strong id="toast-title"></strong>
+    <p id="toast-text"></p>
+  </div>
+  <button class="x" type="button" id="toast-close">Закрыть</button>
+</div>
+
+<footer>
+  <div class="foot">
+    <a class="foot-brand" href="https://health.genotek.ru/consultation/" aria-label="Genotek Здоровье">
+      <img src="assets/genotek_health.svg" width="202" height="25" alt="">
+    </a>
+    <div class="foot-links">
+      <a class="lnk s" href="https://health.genotek.ru/legal/">Правовые документы</a>
+      <a class="lnk s" href="https://health.genotek.ru/consultation/support-web/index.html">Справка</a>
+    </div>
+    <hr class="sep">
+    <div class="fine">
+      <p>© 2016–2026 ООО «Клиника Генотек Здоровье»</p>
+      <p>Фактический адрес: Россия, 123098, г. Москва, ул. Маршала Новикова д.17</p>
+      <p>Консультации, экспресс-консультации и информационные услуги оказывают ООО «Клиника Генотек Здоровье» и <a class="lnk u" href="https://storage.yandexcloud.net/health-legal/health_list.pdf">её партнёры</a></p>
+      <p><span class="badge">0+</span> Genotek Здоровье — сервис онлайн-консультаций с врачами. Для постановки диагноза и назначения плана лечения следует записаться на очный прием к специалисту.</p>
+      <p>Apple и логотип Apple являются зарегистрированными товарными знаками компании Apple Inc. в США и других странах. App Store является знаком обслуживания компании Apple Inc. Android, Google Play и логотип Google Play являются товарными знаками корпорации Google Inc.</p>
+      <p><a class="lnk u" href="https://health.genotek.ru/legal/privacy-policy/">Политики в отношении обработки персональных данных</a></p>
+    </div>
+    <hr class="sep">
+    <details class="reqs">
+      <summary>Реквизиты</summary>
+      <dl>
+        <dt>Полное наименование</dt>
+        <dd>Общество с ограниченной ответственностью «Клиника Генотек Здоровье»</dd>
+        <dt>ОГРН</dt><dd>5177746308394</dd>
+        <dt>ИНН</dt><dd>7704448842</dd>
+        <dt>КПП</dt><dd>770901001</dd>
+        <dt>Юридический адрес</dt>
+        <dd>105120, г. Москва, вн. тер. г. муниципальный округ Таганский, пер. Наставнический, д. 17, стр. 1, помещ. 63/1</dd>
+      </dl>
+    </details>
+  </div>
+</footer>
+
+<script>
+const SECTIONS = [
+  { id: "consultations", label: "Консультации" },
+  { id: "doctors", label: "Мои врачи" },
+  { id: "profile", label: "Профиль" },
+  { id: "subscriptions", label: "Подписки" },
+  { id: "support", label: "Поддержка" },
+  { id: "promocode", label: "Промокод" }
+];
+const DEFAULT_SECTION = SECTIONS[0].id;
+const SUBPAGES = { conclusion: "consultations" };
+const nav = document.getElementById("side-nav");
+let toastTimer = 0;
+
+function currentSection() {
+  const id = location.hash.slice(1);
+  return SECTIONS.some((section) => section.id === id) || id in SUBPAGES ? id : DEFAULT_SECTION;
+}
+
+function render() {
+  const page = currentSection();
+  const active = SUBPAGES[page] || page;
+  nav.innerHTML = SECTIONS.map(({ id, label }) =>
+    `<a href="#${id}"${id === active ? ' class="on" aria-current="page"' : ""}>${label}</a>`
+  ).join("");
+  for (const id of [...SECTIONS.map((section) => section.id), ...Object.keys(SUBPAGES)]) {
+    document.getElementById(id).hidden = id !== page;
+  }
+  document.getElementById("back").href = SUBPAGES[page] ? `#${SUBPAGES[page]}` : "https://health.genotek.ru/consultation/";
+  nav.querySelector(".on").scrollIntoView({ block: "nearest", inline: "nearest" });
+}
+
+function showToast(title, text) {
+  document.getElementById("toast-title").textContent = title;
+  document.getElementById("toast-text").textContent = text;
+  const toast = document.getElementById("toast");
+  toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.hidden = true; }, 4000);
+}
+
+window.addEventListener("hashchange", () => {
+  render();
+  window.scrollTo({ top: 0 });
+});
+document.addEventListener("click", (event) => {
+  const trigger = event.target.closest("[data-toast]");
+  if (!trigger) return;
+  event.preventDefault();
+  showToast("Медкарта", trigger.dataset.toast);
+});
+document.getElementById("send-link").addEventListener("click", () => {
+  showToast("Ссылка отправлена", "Проверьте СМС на номере +7 967 ***-**-08.");
+});
+const PLANS = [
+  { title: "Здоровое лето", grad: "#ff8637, #ffb547", accent: "#d9590b", price: "Купить за 11 880 ₽",
+    items: ["3 консультации дерматовенеролога, терапевта или аллерголога", "Подбор солнцезащитного крема", "Неограниченные экспресс-консультации (дежурные терапевты и педиатры)", "Длительность — 90 дней", "Вы экономите более 20%"] },
+  { title: "Мой психолог", grad: "#819bf8, #af48ff", accent: "#7a2fd6", price: "Купить за 9 028 ₽",
+    items: ["3 консультации психолога", "Длительность — 180 дней", "Вы экономите более 15%"] },
+  { title: "Мужское здоровье", grad: "#55abff, #69728c", accent: "#3f5f8f", price: "7 340 ₽ в месяц",
+    items: ["3 консультации (терапевт, дерматовенеролог, уролог, эндокринолог)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите более 25%"] },
+  { title: "Здоровые суставы", grad: "#bd995b, #ff8637", accent: "#93683b", price: "8 225 ₽ в месяц",
+    items: ["3 консультации (ревматолог, ортопед, травматолог, терапевт)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите более 1 490 ₽ в месяц"] },
+  { title: "Здоровый ЖКТ", grad: "#7386f2, #25e3eb", accent: "#3f58d6", price: "9 600 ₽ в месяц",
+    items: ["3 консультации (гастроэнтеролог, терапевт, диетолог)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите 25%"] },
+  { title: "Женское здоровье", grad: "#fa3aa1, #af48ff", accent: "#c4228a", price: "11 220 ₽ в месяц",
+    items: ["3 консультации (гинеколог, дерматовенеролог, эндокринолог, терапевт)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите до 30%"] },
+  { title: "Безлимитные консультации", grad: "#ff53b4, #ff8637", accent: "#e0306f", price: "9 363 ₽ в месяц",
+    items: ["Неограниченные экспресс-консультации (дежурные терапевты и педиатры)", "5 обычных консультаций (кроме психолога и психотерапевта)", "Автопродление каждый месяц", "Вы экономите на консультациях более 30%"] },
+  { title: "Всегда на связи", grad: "#3b9625, #25c8c8", accent: "#2f7d1d", price: "10 680 ₽ в месяц",
+    items: ["4 консультации любых специалистов (кроме психолога и психотерапевта)", "Неограниченные экспресс-консультации (дежурные терапевты)", "Автопродление каждый месяц", "Вы экономите 25%"] },
+  { title: "Детское здоровье", grad: "#4a80ff, #33d3d3", accent: "#2a62e0", price: "3 429 ₽ в месяц",
+    items: ["3 консультации (педиатр, детский невролог, дерматовенеролог)", "Неограниченные экспресс-консультации (дежурные педиатры)", "Автопродление каждый месяц", "Вы экономите до 30%"] },
+];
+
+document.getElementById("plans").innerHTML = PLANS.map(({ title, grad, accent, price, items }) => `
+  <article class="plan" style="--grad: linear-gradient(135deg, ${grad}); --accent: ${accent}">
+    <h3>${title}</h3>
+    <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+    <button class="btn btn-44" type="button" data-toast="Подписка «${title}» скоро будет доступна для оформления.">${price}</button>
+  </article>`).join("");
+
+const profileForm = document.getElementById("profile-form");
+const profileSave = document.getElementById("pf-save");
+const pfPhone = document.getElementById("pf-phone");
+const pfBirth = document.getElementById("pf-birth");
+const PROFILE_CHECKS = {
+  "pf-name": (value) => value.trim().length > 0,
+  "pf-birth": (value) => !value || /^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d\d$/.test(value),
+  "pf-phone": (value) => value.replace(/\D/g, "").length === 11,
+  "pf-email": (value) => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+};
+let savedProfile = new URLSearchParams(new FormData(profileForm)).toString();
+
+function setFieldError(id, invalid) {
+  document.getElementById(id).setAttribute("aria-invalid", String(invalid));
+  document.getElementById(`${id}-err`).hidden = !invalid;
+  const hint = document.getElementById(`${id}-hint`);
+  if (hint) hint.hidden = invalid;
+}
+
+pfPhone.addEventListener("input", () => {
+  const digits = pfPhone.value.replace(/\D/g, "").replace(/^[78]/, "").slice(0, PHONE_DIGITS);
+  pfPhone.value = digits ? `+7 ${formatPhone(digits)}` : "";
+});
+pfBirth.addEventListener("input", () => {
+  const digits = pfBirth.value.replace(/\D/g, "").slice(0, 8);
+  pfBirth.value = [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4)].filter(Boolean).join(".");
+});
+profileForm.addEventListener("input", (event) => {
+  if (event.target.id in PROFILE_CHECKS && event.target.getAttribute("aria-invalid") === "true") {
+    setFieldError(event.target.id, !PROFILE_CHECKS[event.target.id](event.target.value));
+  }
+  profileSave.disabled = new URLSearchParams(new FormData(profileForm)).toString() === savedProfile;
+});
+profileForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let firstInvalid = null;
+  for (const [id, check] of Object.entries(PROFILE_CHECKS)) {
+    const field = document.getElementById(id);
+    const invalid = !check(field.value);
+    setFieldError(id, invalid);
+    if (invalid && !firstInvalid) firstInvalid = field;
+  }
+  if (firstInvalid) {
+    firstInvalid.focus();
+    return;
+  }
+  savedProfile = new URLSearchParams(new FormData(profileForm)).toString();
+  profileSave.disabled = true;
+  showToast("Профиль", "Изменения сохранены");
+});
+
+const PROMOCODES = {
+  HEALTH10: "Скидка 10% на онлайн-консультацию · до 31 декабря 2026",
+  CORP2026: "Корпоративная подписка «Всегда на связи» · до 31 декабря 2026",
+};
+const promoInput = document.getElementById("promo");
+const promoSubmit = document.getElementById("promo-submit");
+const promoErr = document.getElementById("promo-err");
+const promoList = document.getElementById("promo-list");
+const COUPON_ICON = document.querySelector("#promo-empty .coupon-glyph").outerHTML;
+
+function setPromoError(text) {
+  promoErr.textContent = text;
+  promoErr.hidden = !text;
+  promoInput.setAttribute("aria-invalid", String(Boolean(text)));
+}
+
+promoInput.addEventListener("input", () => {
+  promoSubmit.disabled = !promoInput.value.trim();
+  setPromoError("");
+});
+document.getElementById("promo-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const code = promoInput.value.trim().toUpperCase();
+  if (!code) return;
+  if (!PROMOCODES[code]) {
+    setPromoError("Промокод не найден или срок его действия истёк");
+    return;
+  }
+  if (promoList.querySelector(`[data-code="${code}"]`)) {
+    setPromoError("Этот промокод уже активирован");
+    return;
+  }
+  promoList.insertAdjacentHTML("afterbegin", `
+    <li data-code="${code}">
+      ${COUPON_ICON}
+      <div class="info"><b>${code}</b><span>${PROMOCODES[code]}</span></div>
+      <span class="badge ok">Активен</span>
+    </li>`);
+  promoList.hidden = false;
+  document.getElementById("promo-empty").hidden = true;
+  promoInput.value = "";
+  promoSubmit.disabled = true;
+  showToast("Промокод", `Промокод ${code} активирован`);
+});
+document.getElementById("toast-close").addEventListener("click", () => {
+  document.getElementById("toast").hidden = true;
+});
+
+const RATING_HINTS = ["Ужасно", "Плохо", "Нормально", "Хорошо", "Отлично"];
+const STAR_ICON = '<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9L12 2.8Z"/></svg>';
+const rateModal = document.getElementById("rate-modal");
+const rateForm = document.getElementById("rate-form");
+const rateSubmit = document.getElementById("rate-submit");
+const rateBtn = document.getElementById("rate-btn");
+
+for (const group of document.querySelectorAll("[data-rate]")) {
+  const name = group.dataset.rate;
+  group.innerHTML = RATING_HINTS.map((hint, index) =>
+    `<label class="star" data-value="${index + 1}"><input type="radio" name="${name}" value="${index + 1}" aria-label="${index + 1} из 5 — ${hint}">${STAR_ICON}<span class="tip" aria-hidden="true">${hint}</span></label>`
+  ).join("");
+}
+
+function paintStars(group, value) {
+  for (const star of group.querySelectorAll(".star")) {
+    star.classList.toggle("fill", Number(star.dataset.value) <= value);
+  }
+}
+
+function checkedValue(group) {
+  return Number(group.querySelector("input:checked")?.value || 0);
+}
+
+function syncRateForm() {
+  const ready = [...document.querySelectorAll("[data-rate]")].every((group) => checkedValue(group) > 0);
+  rateSubmit.disabled = !ready;
+}
+
+for (const group of document.querySelectorAll("[data-rate]")) {
+  group.addEventListener("pointerover", (event) => {
+    const star = event.target.closest(".star");
+    if (star) paintStars(group, Number(star.dataset.value));
+  });
+  group.addEventListener("pointerleave", () => paintStars(group, checkedValue(group)));
+  group.addEventListener("change", () => {
+    paintStars(group, checkedValue(group));
+    syncRateForm();
+  });
+}
+
+rateBtn.addEventListener("click", () => {
+  rateForm.reset();
+  for (const group of document.querySelectorAll("[data-rate]")) paintStars(group, 0);
+  syncRateForm();
+  openModal(rateModal);
+});
+const rateDone = document.getElementById("rate-done");
+
+function openModal(modal) {
+  modal.showModal();
+  modal.focus();
+  requestAnimationFrame(() => modal.focus());
+}
+
+const chatModal = document.getElementById("chat-modal");
+const chatForm = document.getElementById("chat-form");
+const chatPhone = document.getElementById("chat-phone");
+const chatSubmit = document.getElementById("chat-submit");
+const PHONE_DIGITS = 10;
+
+function openDone(title, text) {
+  document.getElementById("rate-done-title").textContent = title;
+  document.getElementById("rate-done-text").textContent = text;
+  openModal(rateDone);
+}
+
+function formatPhone(digits) {
+  const parts = [digits.slice(0, 3), digits.slice(3, 6), digits.slice(6, 8), digits.slice(8, 10)];
+  return [parts[0], parts[1]].filter(Boolean).join(" ") + (parts[2] ? `-${parts[2]}` : "") + (parts[3] ? `-${parts[3]}` : "");
+}
+
+chatPhone.addEventListener("input", () => {
+  const digits = chatPhone.value.replace(/\D/g, "").slice(0, PHONE_DIGITS);
+  chatPhone.value = formatPhone(digits);
+  chatSubmit.disabled = digits.length < PHONE_DIGITS;
+});
+document.getElementById("chat-btn").addEventListener("click", () => {
+  chatForm.reset();
+  chatSubmit.disabled = true;
+  openModal(chatModal);
+});
+chatForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (chatSubmit.disabled) return;
+  const phone = `+7 ${chatPhone.value}`;
+  chatModal.close();
+  openDone("Ссылка отправлена", `Проверьте СМС на номере ${phone}`);
+});
+
+for (const modal of [rateModal, rateDone, chatModal]) {
+  modal.addEventListener("click", (event) => {
+    const box = modal.getBoundingClientRect();
+    const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+    if ((event.target === modal && outside) || event.target.closest("[data-close]")) modal.close();
+  });
+}
+rateForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  rateModal.close();
+  rateBtn.remove();
+  openDone("Ваш отзыв отправлен", "Спасибо");
+});
+
+history.scrollRestoration = "manual";
+render();
+window.addEventListener("load", () => window.scrollTo({ top: 0 }));
+</script>
+</body>
+</html>
