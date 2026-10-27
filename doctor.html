@@ -120,7 +120,8 @@
   .timeline.open li.extra { display: grid; }
   .toggle-more { margin-top: 12px; }
 
-  .booking { position: sticky; top: calc(var(--header) + 40px); background: #fff; box-shadow: inset 0 0 0 1px #dfe5f4, var(--shadow-card); }
+  .booking { position: sticky; top: calc(var(--header) + 40px); scroll-margin-top: calc(var(--header) + 16px); background: #fff; box-shadow: inset 0 0 0 1px #dfe5f4, var(--shadow-card); }
+  .booking .sep { margin: 12px 0; }
   .booking h2 { margin: 0 0 16px; }
   .booking .role { margin: 0; color: var(--on-var); font-size: 14px; line-height: 20px; letter-spacing: .1px; }
   .booking .cost { margin: 4px 0 0; color: var(--ink); font-size: 32px; line-height: 40px; font-weight: 600; }
@@ -191,6 +192,19 @@
   .reqs dt { color: var(--on-var); font-size: 12px; line-height: 16px; }
   .reqs dd { margin: 0; color: var(--ink); font-size: 12px; line-height: 16px; }
 
+  .fab-book {
+    display: none; position: fixed; z-index: 25;
+    left: var(--side); right: var(--side); bottom: max(16px, env(safe-area-inset-bottom));
+    min-height: 56px; padding: 16px 24px;
+    border: 0; border-radius: 9999px;
+    background: var(--blue); color: #fff;
+    font: 600 16px/24px var(--font); text-decoration: none; text-align: center;
+    box-shadow: var(--shadow-pop);
+    transition: opacity 160ms ease, transform 160ms ease, background-color 120ms ease;
+  }
+  .fab-book:hover { background: color-mix(in srgb, var(--blue) 92%, var(--on-blue-c) 8%); }
+  .fab-book.is-visible { display: flex; align-items: center; justify-content: center; }
+
   @media (max-width: 1024px) {
     :root { --side: 16px; --header-side: 16px; }
     .wrap { padding-top: 24px; }
@@ -203,11 +217,15 @@
     .bar { grid-template-columns: minmax(0, 1fr) auto; }
     .actions { grid-column: 2; }
     .reqs dl { grid-template-columns: 1fr; }
+    body.has-fab .wrap { padding-bottom: 100px; }
   }
   @media (max-width: 600px) {
     .card { padding: 20px; border-radius: 20px; }
     .profile { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .profile h1 { font-size: 28px; line-height: 32px; }
+    .profile .avatar.a96 { width: 60px; height: 60px; font-size: 20px; line-height: 24px; }
+    .profile h1 { font-size: 22px; line-height: 28px; }
+    .card h2, .booking h2 { font-size: 22px; line-height: 28px; }
+    .card p { font-size: 14px; line-height: 20px; }
     .profile-info { width: 100%; padding-right: 0; }
     .fav { top: 16px; right: 16px; }
     .timeline li { grid-template-columns: 1fr; gap: 4px; padding: 14px 16px; }
@@ -302,7 +320,7 @@
       </section>
     </div>
 
-    <aside class="card booking" aria-labelledby="booking-title">
+    <aside class="card booking" id="booking" aria-labelledby="booking-title">
       <h2 id="booking-title">Запись на приём</h2>
       <p class="role">Терапевт</p>
       <p class="cost">2 499 ₽</p>
@@ -367,6 +385,8 @@
   <h2 id="days-title">Выбор времени</h2>
   <div id="days-list"></div>
 </dialog>
+
+<a class="fab-book" id="fab-book" href="#booking">Записаться на приём</a>
 
 <div class="toast" id="toast" role="status" hidden>
   <div>
@@ -571,6 +591,30 @@ document.getElementById("toast-close").addEventListener("click", () => {
 });
 
 renderSchedule();
+
+const booking = document.getElementById("booking");
+const fabBook = document.getElementById("fab-book");
+const fabMq = window.matchMedia("(max-width: 1024px)");
+let bookingVisible = true;
+
+function syncFab() {
+  const show = fabMq.matches && !bookingVisible;
+  fabBook.classList.toggle("is-visible", show);
+  document.body.classList.toggle("has-fab", show);
+}
+
+new IntersectionObserver(([entry]) => {
+  bookingVisible = entry.isIntersecting;
+  syncFab();
+}, { threshold: 0 }).observe(booking);
+
+fabMq.addEventListener("change", syncFab);
+fabBook.addEventListener("click", (event) => {
+  event.preventDefault();
+  const top = booking.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header")) || 72) - 16;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+});
+syncFab();
 </script>
 </body>
 </html>
